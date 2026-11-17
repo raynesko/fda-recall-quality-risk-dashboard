@@ -76,7 +76,7 @@ MEASURES = {  # table -> [(name, dax, formatString)]
     ],
     "dash_watchlist": [
         ("Flagged Categories", "CALCULATE(COUNTROWS(dash_watchlist), dash_watchlist[flag] = TRUE())", "0"),
-        ("Score", "SUM(dash_watchlist[score])", "0.000"),
+        ("Risk Score", "SUM(dash_watchlist[score])", "0.000"),
     ],
     "dash_kpi": [
         ("Data As Of", "\"Data as of \" & FIRSTNONBLANK(dash_kpi[data_as_of], 1) & \" (report date). \" & FIRSTNONBLANK(dash_kpi[footer], 1)", ""),
@@ -115,6 +115,19 @@ def q(name: str) -> str:
     return name if name.replace("_", "").isalnum() else "'" + name.replace("'", "''") + "'"
 
 
+def check_names() -> None:
+    """Power BI rejects a measure whose name matches (case-insensitively) a column in its table, and needs
+    measure names unique across the model. Fail here instead of at load time in Power BI Desktop."""
+    seen: dict[str, str] = {}
+    for table, rel in TABLES.items():
+        cols = {c.lower() for c in pd.read_parquet(DATA / rel).columns}
+        for name, _, _ in MEASURES.get(table, []):
+            k = name.lower()
+            assert k not in cols, f"measure '{name}' collides with a column in {table}"
+            assert k not in seen, f"measure '{name}' defined in both {seen.get(k)} and {table}"
+            seen[k] = table
+
+
 def table_tmdl(table: str, rel_path: str) -> str:
     df = pd.read_parquet(DATA / rel_path)
     L = [f"table {table}", ""]
@@ -151,6 +164,7 @@ def table_tmdl(table: str, rel_path: str) -> str:
 
 
 def write_model() -> None:
+    check_names()
     d = SM / "definition"
     (d / "tables").mkdir(parents=True, exist_ok=True)
     (SM / "definition.pbism").write_text(json.dumps({
@@ -349,10 +363,10 @@ def pages() -> dict[str, tuple[str, list[dict]]]:
         chart("p4_table", 20, 120, 820, 300, 3, "tableEx",
               {"Values": [proj(col(wl, "rank"), "Rank"), proj(col(wl, "product_type"), "Type"),
                           proj(col(dc, "category_id"), "Category"), proj(col(wl, "flag_label"), "Flag"),
-                          proj(meas(wl, "Score"), "Score"), proj(col(wl, "stability_pct"), "Stability %"),
+                          proj(meas(wl, "Risk Score"), "Score"), proj(col(wl, "stability_pct"), "Stability %"),
                           proj(col(wl, "why_flagged"), "Why flagged")]},
               "Ranked categories (latest complete month) - click a row for QA actions",
-              sort=(meas(wl, "Score"), "Descending")),
+              sort=(meas(wl, "Risk Score"), "Descending")),
         chart("p4_components", 850, 120, 410, 300, 4, "barChart",
               {"Category": [proj(col(dc, "category_id"), "Category")],
                "Y": [proj({"Aggregation": {"Expression": col("dash_watch_components", "weighted_contribution"), "Function": 0}}, "Contribution")],

@@ -3,7 +3,7 @@ table dash_watchlist
 	measure 'Flagged Categories' = CALCULATE(COUNTROWS(dash_watchlist), dash_watchlist[flag] = TRUE())
 		formatString: 0
 
-	measure Score = SUM(dash_watchlist[score])
+	measure 'Risk Score' = SUM(dash_watchlist[score])
 		formatString: 0.000
 
 	column product_type

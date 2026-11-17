@@ -83,11 +83,11 @@
                       "Entity": "dash_watchlist"
                     }
                   },
-                  "Property": "Score"
+                  "Property": "Risk Score"
                 }
               },
-              "queryRef": "dash_watchlist.Score",
-              "nativeQueryRef": "Score",
+              "queryRef": "dash_watchlist.Risk Score",
+              "nativeQueryRef": "Risk Score",
               "displayName": "Score"
             },
             {
@@ -133,7 +133,7 @@
                     "Entity": "dash_watchlist"
                   }
                 },
-                "Property": "Score"
+                "Property": "Risk Score"
               }
             },
             "direction": "Descending"
