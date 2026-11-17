@@ -1,0 +1,15 @@
+{
+  "name": "FDA Recall QA",
+  "dataColors": ["#2a78d6", "#c9c7c1", "#d1495b", "#6b6963", "#1f1f1e", "#8fb8ea", "#e9a3ad", "#a8a59e"],
+  "background": "#fcfcfb",
+  "foreground": "#1f1f1e",
+  "tableAccent": "#2a78d6",
+  "good": "#2a78d6",
+  "neutral": "#c9c7c1",
+  "bad": "#d1495b",
+  "textClasses": {
+    "title": {"fontFace": "Segoe UI Semibold", "fontSize": 13, "color": "#1f1f1e"},
+    "label": {"fontFace": "Segoe UI", "fontSize": 10, "color": "#6b6963"},
+    "callout": {"fontFace": "Segoe UI Semibold", "fontSize": 26, "color": "#1f1f1e"}
+  }
+}

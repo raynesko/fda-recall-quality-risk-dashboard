@@ -1,0 +1,14 @@
+table dim_product_type
+
+	column product_type
+		dataType: string
+		summarizeBy: none
+		sourceColumn: product_type
+
+	partition dim_product_type = m
+		mode: import
+		source =
+				let
+				    Source = Parquet.Document(File.Contents(DataFolder & "dashboard\dim_product_type.parquet"))
+				in
+				    Source

@@ -1,0 +1,143 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.6.0/schema.json",
+  "name": "p4_actions",
+  "position": {
+    "x": 20,
+    "y": 425,
+    "z": 5,
+    "width": 820,
+    "height": 260,
+    "tabOrder": 5
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dash_actions"
+                    }
+                  },
+                  "Property": "category"
+                }
+              },
+              "queryRef": "dash_actions.category",
+              "nativeQueryRef": "category",
+              "displayName": "Category"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dash_actions"
+                    }
+                  },
+                  "Property": "phase"
+                }
+              },
+              "queryRef": "dash_actions.phase",
+              "nativeQueryRef": "phase",
+              "displayName": "DMAIC phase"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dash_actions"
+                    }
+                  },
+                  "Property": "action"
+                }
+              },
+              "queryRef": "dash_actions.action",
+              "nativeQueryRef": "action",
+              "displayName": "Recommended QA action"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dash_actions"
+                    }
+                  },
+                  "Property": "owner_function"
+                }
+              },
+              "queryRef": "dash_actions.owner_function",
+              "nativeQueryRef": "owner_function",
+              "displayName": "Owner"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dash_actions"
+                    }
+                  },
+                  "Property": "metric"
+                }
+              },
+              "queryRef": "dash_actions.metric",
+              "nativeQueryRef": "metric",
+              "displayName": "Example metric"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dash_actions"
+                    }
+                  },
+                  "Property": "citation"
+                }
+              },
+              "queryRef": "dash_actions.citation",
+              "nativeQueryRef": "citation",
+              "displayName": "Citation"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'DMAIC QA actions for the selected category'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "12.0D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

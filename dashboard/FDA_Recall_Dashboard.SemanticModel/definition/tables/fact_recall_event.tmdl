@@ -1,0 +1,121 @@
+table fact_recall_event
+
+	measure 'Total Events' = COUNTROWS(fact_recall_event)
+		formatString: #,0
+
+	measure 'As Of Month' = EOMONTH(CALCULATE(MAX(fact_recall_event[report_month]), REMOVEFILTERS(fact_recall_event)), -1)
+		formatString: yyyy-mm
+
+	measure 'Events T12' =
+			VAR e = [As Of Month]
+			RETURN CALCULATE(COUNTROWS(fact_recall_event), fact_recall_event[report_month] > EDATE(e, -12), fact_recall_event[report_month] <= e)
+		formatString: #,0
+
+	measure 'Events P12' =
+			VAR e = [As Of Month]
+			RETURN CALCULATE(COUNTROWS(fact_recall_event), fact_recall_event[report_month] > EDATE(e, -24), fact_recall_event[report_month] <= EDATE(e, -12))
+		formatString: #,0
+
+	measure 'Change vs Prior 12m' = DIVIDE([Events T12] - [Events P12], [Events P12])
+		formatString: +0.0%;-0.0%;0.0%
+
+	measure 'Class I Share T12' = DIVIDE(CALCULATE([Events T12], fact_recall_event[classification] = "Class I"), [Events T12])
+		formatString: 0.0%
+
+	measure 'Events Complete Months' = CALCULATE(COUNTROWS(fact_recall_event), fact_recall_event[report_month] >= DATE(2012, 7, 1), fact_recall_event[report_month] <= [As Of Month])
+		formatString: #,0
+
+	column event_id
+		dataType: string
+		summarizeBy: none
+		sourceColumn: event_id
+
+	column product_type
+		dataType: string
+		summarizeBy: none
+		sourceColumn: product_type
+
+	column report_date_key
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: report_date_key
+
+	column report_month
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		summarizeBy: none
+		sourceColumn: report_month
+
+	column recall_initiation_date_key
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: recall_initiation_date_key
+
+	column firm_key
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: firm_key
+
+	column category_id
+		dataType: string
+		summarizeBy: none
+		sourceColumn: category_id
+
+	column category_method
+		dataType: string
+		summarizeBy: none
+		sourceColumn: category_method
+
+	column category_confidence
+		dataType: double
+		summarizeBy: none
+		sourceColumn: category_confidence
+
+	column classification
+		dataType: string
+		summarizeBy: none
+		sourceColumn: classification
+
+	column class_severity
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: class_severity
+
+	column n_products
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: n_products
+
+	column n_reason_variants
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: n_reason_variants
+
+	column reason_for_recall
+		dataType: string
+		summarizeBy: none
+		sourceColumn: reason_for_recall
+
+	column voluntary_mandated
+		dataType: string
+		summarizeBy: none
+		sourceColumn: voluntary_mandated
+
+	column state
+		dataType: string
+		summarizeBy: none
+		sourceColumn: state
+
+	column lag_days
+		dataType: double
+		summarizeBy: none
+		sourceColumn: lag_days
+
+	partition fact_recall_event = m
+		mode: import
+		source =
+				let
+				    Source = Parquet.Document(File.Contents(DataFolder & "star\fact_recall_event.parquet")),
+				    Typed = Table.TransformColumnTypes(Source, {{"report_month", type datetime}})
+				in
+				    Typed

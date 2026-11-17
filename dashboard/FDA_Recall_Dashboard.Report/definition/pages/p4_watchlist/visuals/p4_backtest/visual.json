@@ -1,0 +1,35 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.6.0/schema.json",
+  "name": "p4_backtest",
+  "position": {
+    "x": 250,
+    "y": 55,
+    "z": 2,
+    "width": 1010,
+    "height": 60,
+    "tabOrder": 2
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Honest result: in a pre-registered backtest (10 yearly origins) this score did NOT beat naive baselines at predicting next-year increases (regression to the mean). Use it to triage attention; check 'Stability %' before acting.",
+                    "textStyle": {
+                      "fontSize": "9pt"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

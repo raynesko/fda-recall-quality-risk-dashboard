@@ -1,0 +1,143 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.6.0/schema.json",
+  "name": "p2_events",
+  "position": {
+    "x": 20,
+    "y": 460,
+    "z": 6,
+    "width": 1240,
+    "height": 225,
+    "tabOrder": 6
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_recall_event"
+                    }
+                  },
+                  "Property": "event_id"
+                }
+              },
+              "queryRef": "fact_recall_event.event_id",
+              "nativeQueryRef": "event_id",
+              "displayName": "Event"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_recall_event"
+                    }
+                  },
+                  "Property": "product_type"
+                }
+              },
+              "queryRef": "fact_recall_event.product_type",
+              "nativeQueryRef": "product_type",
+              "displayName": "Type"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_recall_event"
+                    }
+                  },
+                  "Property": "category_id"
+                }
+              },
+              "queryRef": "fact_recall_event.category_id",
+              "nativeQueryRef": "category_id",
+              "displayName": "Category"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_recall_event"
+                    }
+                  },
+                  "Property": "classification"
+                }
+              },
+              "queryRef": "fact_recall_event.classification",
+              "nativeQueryRef": "classification",
+              "displayName": "Class"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_firm"
+                    }
+                  },
+                  "Property": "firm_name"
+                }
+              },
+              "queryRef": "dim_firm.firm_name",
+              "nativeQueryRef": "firm_name",
+              "displayName": "Recalling firm"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_recall_event"
+                    }
+                  },
+                  "Property": "reason_for_recall"
+                }
+              },
+              "queryRef": "fact_recall_event.reason_for_recall",
+              "nativeQueryRef": "reason_for_recall",
+              "displayName": "Reason for recall (FDA text)"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Event detail (click a Pareto bar to filter)'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "12.0D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

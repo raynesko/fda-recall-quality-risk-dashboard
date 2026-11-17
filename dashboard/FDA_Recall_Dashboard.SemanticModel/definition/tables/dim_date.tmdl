@@ -1,0 +1,47 @@
+table dim_date
+
+	column date_key
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: date_key
+
+	column date
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		summarizeBy: none
+		sourceColumn: date
+
+	column year
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: year
+
+	column quarter
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: quarter
+
+	column month
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: month
+
+	column month_name
+		dataType: string
+		summarizeBy: none
+		sourceColumn: month_name
+
+	column month_start
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		summarizeBy: none
+		sourceColumn: month_start
+
+	partition dim_date = m
+		mode: import
+		source =
+				let
+				    Source = Parquet.Document(File.Contents(DataFolder & "star\dim_date.parquet")),
+				    Typed = Table.TransformColumnTypes(Source, {{"date", type datetime}, {"month_start", type datetime}})
+				in
+				    Typed

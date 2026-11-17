@@ -1,0 +1,689 @@
+{
+  "backtest.best_baseline": {
+    "label": "achieved",
+    "recorded_utc": "2026-11-17T22:04:31+00:00",
+    "source": "risk/backtest.py",
+    "value": "B3_random_expected"
+  },
+  "backtest.best_baseline_p_at_3": {
+    "label": "achieved",
+    "note": "10 yearly origins 2016-06..2025-06, 17 origin x product cells, 161 eligible unit-origins",
+    "recorded_utc": "2026-11-17T22:04:31+00:00",
+    "source": "risk/backtest.py",
+    "value": 0.382
+  },
+  "backtest.diff_vs_B1_volume": {
+    "label": "achieved",
+    "note": "sign-flip p=0.9444; block-bootstrap 95% CI -0.204..0.044; 10 yearly origins 2016-06..2025-06, 17 origin x product cells, 161 eligible unit-origins",
+    "recorded_utc": "2026-11-17T22:04:31+00:00",
+    "source": "risk/backtest.py",
+    "value": -0.078
+  },
+  "backtest.diff_vs_B2_momentum": {
+    "label": "achieved",
+    "note": "sign-flip p=0.1899; block-bootstrap 95% CI -0.021..0.137; 10 yearly origins 2016-06..2025-06, 17 origin x product cells, 161 eligible unit-origins",
+    "recorded_utc": "2026-11-17T22:04:31+00:00",
+    "source": "risk/backtest.py",
+    "value": 0.059
+  },
+  "backtest.leakage_check_passed": {
+    "label": "achieved",
+    "note": "real data, origin 2021-06",
+    "recorded_utc": "2026-11-17T22:04:11+00:00",
+    "source": "risk/backtest.py",
+    "value": true
+  },
+  "backtest.momentum_rho": {
+    "label": "achieved",
+    "note": "regression-to-the-mean check; CI -0.501..-0.239",
+    "recorded_utc": "2026-11-17T22:04:31+00:00",
+    "source": "risk/backtest.py",
+    "value": -0.37
+  },
+  "backtest.n_cells": {
+    "label": "achieved",
+    "note": "3 cells dropped (<6 eligible units)",
+    "recorded_utc": "2026-11-17T22:04:31+00:00",
+    "source": "risk/backtest.py",
+    "value": 17
+  },
+  "backtest.n_origins": {
+    "label": "achieved",
+    "recorded_utc": "2026-11-17T22:04:31+00:00",
+    "source": "risk/backtest.py",
+    "value": 10
+  },
+  "backtest.p_at_3": {
+    "label": "achieved",
+    "note": "10 yearly origins 2016-06..2025-06, 17 origin x product cells, 161 eligible unit-origins",
+    "recorded_utc": "2026-11-17T22:04:30+00:00",
+    "source": "risk/backtest.py",
+    "value": 0.235
+  },
+  "backtest.p_at_3.B1_volume": {
+    "label": "achieved",
+    "note": "10 yearly origins 2016-06..2025-06, 17 origin x product cells, 161 eligible unit-origins",
+    "recorded_utc": "2026-11-17T22:04:30+00:00",
+    "source": "risk/backtest.py",
+    "value": 0.314
+  },
+  "backtest.p_at_3.B2_momentum": {
+    "label": "achieved",
+    "note": "10 yearly origins 2016-06..2025-06, 17 origin x product cells, 161 eligible unit-origins",
+    "recorded_utc": "2026-11-17T22:04:30+00:00",
+    "source": "risk/backtest.py",
+    "value": 0.176
+  },
+  "backtest.p_at_3.B3_random_expected": {
+    "label": "achieved",
+    "note": "10 yearly origins 2016-06..2025-06, 17 origin x product cells, 161 eligible unit-origins",
+    "recorded_utc": "2026-11-17T22:04:30+00:00",
+    "source": "risk/backtest.py",
+    "value": 0.382
+  },
+  "backtest.p_at_3.score": {
+    "label": "achieved",
+    "note": "10 yearly origins 2016-06..2025-06, 17 origin x product cells, 161 eligible unit-origins",
+    "recorded_utc": "2026-11-17T22:04:30+00:00",
+    "source": "risk/backtest.py",
+    "value": 0.235
+  },
+  "backtest.preregistration_hash_match": {
+    "label": "achieved",
+    "recorded_utc": "2026-11-17T22:04:10+00:00",
+    "source": "risk/backtest.py",
+    "value": true
+  },
+  "backtest.score_perm_p": {
+    "label": "achieved",
+    "note": "one-sided, 1,000 within-cell shuffles",
+    "recorded_utc": "2026-11-17T22:04:31+00:00",
+    "source": "risk/backtest.py",
+    "value": 0.999
+  },
+  "backtest.spearman_rho": {
+    "label": "achieved",
+    "note": "10 yearly origins 2016-06..2025-06, 17 origin x product cells, 161 eligible unit-origins",
+    "recorded_utc": "2026-11-17T22:04:31+00:00",
+    "source": "risk/backtest.py",
+    "value": -0.308
+  },
+  "backtest.spearman_rho_ci": {
+    "label": "achieved",
+    "note": "block bootstrap over origins, 2,000",
+    "recorded_utc": "2026-11-17T22:04:31+00:00",
+    "source": "risk/backtest.py",
+    "value": [
+      -0.446,
+      -0.184
+    ]
+  },
+  "backtest.target_met": {
+    "label": "achieved",
+    "note": "p@3 criterion missed; rho criterion missed",
+    "recorded_utc": "2026-11-17T22:04:31+00:00",
+    "source": "risk/backtest.py",
+    "value": false
+  },
+  "clf.alt_single_match_precision_all": {
+    "label": "achieved",
+    "note": "sensitivity operating point; coverage 0.687",
+    "recorded_utc": "2026-11-17T22:03:35+00:00",
+    "source": "classify/final.py",
+    "value": 0.913
+  },
+  "clf.alt_single_match_precision_random": {
+    "label": "achieved",
+    "note": "sensitivity operating point; coverage 0.735",
+    "recorded_utc": "2026-11-17T22:03:35+00:00",
+    "source": "classify/final.py",
+    "value": 0.912
+  },
+  "clf.corpus_coverage": {
+    "label": "achieved",
+    "note": "share of events with >= 1 rule match",
+    "recorded_utc": "2026-11-17T22:03:38+00:00",
+    "source": "classify/final.py",
+    "value": 0.893
+  },
+  "clf.corpus_multi_match_share": {
+    "label": "achieved",
+    "recorded_utc": "2026-11-17T22:03:38+00:00",
+    "source": "classify/final.py",
+    "value": 0.196
+  },
+  "clf.corpus_n_events": {
+    "label": "achieved",
+    "recorded_utc": "2026-11-17T22:03:38+00:00",
+    "source": "classify/final.py",
+    "value": 12687
+  },
+  "clf.corpus_rules_ml_agreement": {
+    "label": "achieved",
+    "note": "agreement between production rules and comparison ML on rule-accepted events",
+    "recorded_utc": "2026-11-17T22:03:38+00:00",
+    "source": "classify/final.py",
+    "value": 0.875
+  },
+  "clf.corpus_unclassified_share": {
+    "label": "achieved",
+    "recorded_utc": "2026-11-17T22:03:38+00:00",
+    "source": "classify/final.py",
+    "value": 0.107
+  },
+  "clf.mcnemar_p_all": {
+    "label": "achieved",
+    "recorded_utc": "2026-11-17T22:03:26+00:00",
+    "source": "classify/model.py",
+    "value": 0.243
+  },
+  "clf.mcnemar_p_random": {
+    "label": "achieved",
+    "recorded_utc": "2026-11-17T22:03:32+00:00",
+    "source": "classify/model.py",
+    "value": 0.2649
+  },
+  "clf.ml_macro_f1_all": {
+    "label": "achieved",
+    "recorded_utc": "2026-11-17T22:03:26+00:00",
+    "source": "classify/model.py",
+    "value": 0.6767
+  },
+  "clf.ml_macro_f1_ci_all": {
+    "label": "achieved",
+    "recorded_utc": "2026-11-17T22:03:26+00:00",
+    "source": "classify/model.py",
+    "value": [
+      0.6267,
+      0.7179
+    ]
+  },
+  "clf.ml_macro_f1_ci_random": {
+    "label": "achieved",
+    "recorded_utc": "2026-11-17T22:03:32+00:00",
+    "source": "classify/model.py",
+    "value": [
+      0.5529,
+      0.6958
+    ]
+  },
+  "clf.ml_macro_f1_random": {
+    "label": "achieved",
+    "recorded_utc": "2026-11-17T22:03:32+00:00",
+    "source": "classify/model.py",
+    "value": 0.6365
+  },
+  "clf.prod_coverage_gold_all": {
+    "label": "achieved",
+    "recorded_utc": "2026-11-17T22:03:35+00:00",
+    "source": "classify/final.py",
+    "value": 0.923
+  },
+  "clf.prod_coverage_gold_random": {
+    "label": "achieved",
+    "recorded_utc": "2026-11-17T22:03:35+00:00",
+    "source": "classify/final.py",
+    "value": 0.9
+  },
+  "clf.prod_precision_accepted_all": {
+    "label": "achieved",
+    "note": "rules, accept any match; n_accepted=277/300; 95% bootstrap CI 0.859-0.928",
+    "recorded_utc": "2026-11-17T22:03:35+00:00",
+    "source": "classify/final.py",
+    "value": 0.895
+  },
+  "clf.prod_precision_accepted_random": {
+    "label": "achieved",
+    "note": "rules, accept any match; n_accepted=180/200; 95% bootstrap CI 0.850-0.939",
+    "recorded_utc": "2026-11-17T22:03:35+00:00",
+    "source": "classify/final.py",
+    "value": 0.894
+  },
+  "clf.production_method": {
+    "label": "achieved",
+    "note": "ML (TF-IDF+LR) lost to rules on gold set; kept as comparison only",
+    "recorded_utc": "2026-11-17T22:03:35+00:00",
+    "source": "classify/final.py",
+    "value": "keyword_rules_v1"
+  },
+  "clf.rules_coverage_all": {
+    "label": "achieved",
+    "recorded_utc": "2026-11-17T22:03:12+00:00",
+    "source": "classify/evaluate_rules.py",
+    "value": 0.9233
+  },
+  "clf.rules_coverage_random": {
+    "label": "achieved",
+    "recorded_utc": "2026-11-17T22:03:12+00:00",
+    "source": "classify/evaluate_rules.py",
+    "value": 0.9
+  },
+  "clf.rules_macro_f1_all": {
+    "label": "achieved",
+    "recorded_utc": "2026-11-17T22:03:12+00:00",
+    "source": "classify/evaluate_rules.py",
+    "value": 0.8024
+  },
+  "clf.rules_macro_f1_random": {
+    "label": "achieved",
+    "recorded_utc": "2026-11-17T22:03:12+00:00",
+    "source": "classify/evaluate_rules.py",
+    "value": 0.7798
+  },
+  "clf.spot_check_accepted_accuracy": {
+    "label": "achieved",
+    "note": "informal sanity check, 25/26 rule-accepted predictions correct; seed 7; LLM annotator",
+    "recorded_utc": "2026-11-16T17:46:18+00:00",
+    "source": "data/labels/spot_check_30.csv",
+    "value": 0.962
+  },
+  "clf.spot_check_unclassified": {
+    "label": "achieved",
+    "note": "of 30",
+    "recorded_utc": "2026-11-16T17:46:18+00:00",
+    "source": "data/labels/spot_check_30.csv",
+    "value": 4
+  },
+  "clf.uplift_ci_all": {
+    "label": "achieved",
+    "recorded_utc": "2026-11-17T22:03:26+00:00",
+    "source": "classify/model.py",
+    "value": [
+      -0.1728,
+      -0.0501
+    ]
+  },
+  "clf.uplift_ci_random": {
+    "label": "achieved",
+    "recorded_utc": "2026-11-17T22:03:32+00:00",
+    "source": "classify/model.py",
+    "value": [
+      -0.2025,
+      -0.0421
+    ]
+  },
+  "clf.uplift_vs_rules_all": {
+    "label": "achieved",
+    "recorded_utc": "2026-11-17T22:03:26+00:00",
+    "source": "classify/model.py",
+    "value": -0.1257
+  },
+  "clf.uplift_vs_rules_random": {
+    "label": "achieved",
+    "recorded_utc": "2026-11-17T22:03:32+00:00",
+    "source": "classify/model.py",
+    "value": -0.1433
+  },
+  "data.lag_p90_days": {
+    "label": "achieved",
+    "note": "product level, all types; used to truncate alt-date series in T4.2.1",
+    "recorded_utc": "2026-11-17T22:02:51+00:00",
+    "source": "fda_recall/clean.py",
+    "value": 160.0
+  },
+  "data.n_events": {
+    "label": "achieved",
+    "recorded_utc": "2026-11-17T22:02:51+00:00",
+    "source": "fda_recall/clean.py",
+    "value": 12687
+  },
+  "data.n_product_rows": {
+    "label": "achieved",
+    "recorded_utc": "2026-11-17T22:02:51+00:00",
+    "source": "fda_recall/clean.py",
+    "value": 47708
+  },
+  "data.report_date_max": {
+    "label": "achieved",
+    "recorded_utc": "2026-11-17T22:02:51+00:00",
+    "source": "fda_recall/clean.py",
+    "value": "2026-11-04"
+  },
+  "data.report_date_min": {
+    "label": "achieved",
+    "recorded_utc": "2026-11-17T22:02:51+00:00",
+    "source": "fda_recall/clean.py",
+    "value": "2012-06-20"
+  },
+  "labels.gold_sha256": {
+    "label": "achieved",
+    "recorded_utc": "2026-11-17T22:03:10+00:00",
+    "source": "labeling/agreement.py",
+    "value": "7b9e30128daf0349aa3422d7fdf71823218745e2a634809f1ed877204a045d6a"
+  },
+  "labels.kappa_llm_a_vs_b": {
+    "label": "achieved",
+    "note": "two LLM annotators, n=60",
+    "recorded_utc": "2026-11-17T22:03:10+00:00",
+    "source": "labeling/agreement.py",
+    "value": 0.9811
+  },
+  "labels.n_gold": {
+    "label": "achieved",
+    "recorded_utc": "2026-11-17T22:03:10+00:00",
+    "source": "labeling/agreement.py",
+    "value": 300
+  },
+  "pareto.drugs.unclassified_share": {
+    "label": "achieved",
+    "recorded_utc": "2026-11-17T22:03:43+00:00",
+    "source": "analysis/pareto.py",
+    "value": 0.035
+  },
+  "pareto.drugs.vital_few": {
+    "label": "achieved",
+    "recorded_utc": "2026-11-17T22:03:43+00:00",
+    "source": "analysis/pareto.py",
+    "value": "IMPURITY, SPEC_FAIL, STERILITY, POTENCY, FOREIGN, LABELING, MIXUP, CGMP"
+  },
+  "pareto.drugs.vital_few_k": {
+    "label": "achieved",
+    "note": "count view, 2012-06..2026-11",
+    "recorded_utc": "2026-11-17T22:03:43+00:00",
+    "source": "analysis/pareto.py",
+    "value": 8
+  },
+  "pareto.drugs.vital_few_share": {
+    "label": "achieved",
+    "note": "share of all events incl. Unclassified, 2012-06..2026-11",
+    "recorded_utc": "2026-11-17T22:03:43+00:00",
+    "source": "analysis/pareto.py",
+    "value": 0.825
+  },
+  "pareto.food.unclassified_share": {
+    "label": "achieved",
+    "recorded_utc": "2026-11-17T22:03:44+00:00",
+    "source": "analysis/pareto.py",
+    "value": 0.15
+  },
+  "pareto.food.vital_few": {
+    "label": "achieved",
+    "recorded_utc": "2026-11-17T22:03:44+00:00",
+    "source": "analysis/pareto.py",
+    "value": "ALLERGEN, MICRO, FOREIGN, LABELING, PROCESS_SANITATION, IMPURITY"
+  },
+  "pareto.food.vital_few_k": {
+    "label": "achieved",
+    "note": "count view, 2012-06..2026-11",
+    "recorded_utc": "2026-11-17T22:03:44+00:00",
+    "source": "analysis/pareto.py",
+    "value": 6
+  },
+  "pareto.food.vital_few_share": {
+    "label": "achieved",
+    "note": "share of all events incl. Unclassified, 2012-06..2026-11",
+    "recorded_utc": "2026-11-17T22:03:44+00:00",
+    "source": "analysis/pareto.py",
+    "value": 0.825
+  },
+  "pareto.min_kendall_tau": {
+    "label": "achieved",
+    "note": "minimum over product_type x period x comparison; see reports/tables/pareto_rank_comparison.csv",
+    "recorded_utc": "2026-11-17T22:03:44+00:00",
+    "source": "analysis/pareto.py",
+    "value": -0.031
+  },
+  "risk.latest_month": {
+    "label": "achieved",
+    "recorded_utc": "2026-11-17T22:04:08+00:00",
+    "source": "risk/score.py",
+    "value": "2026-10"
+  },
+  "risk.latest_n_flagged": {
+    "label": "achieved",
+    "note": "Drugs/FOREIGN; Drugs/MICRO; Drugs/MIXUP; Drugs/STERILITY; Food/IMPURITY; Food/PROCESS_SANITATION; Food/UNAPPROVED",
+    "recorded_utc": "2026-11-17T22:04:08+00:00",
+    "source": "risk/score.py",
+    "value": 7
+  },
+  "risk.preregistration_sha256": {
+    "label": "achieved",
+    "note": "recorded 2026-11-16 before any T5.1.2 code existed",
+    "recorded_utc": "2026-11-16T17:52:41+00:00",
+    "source": "docs/methodology/risk-score.md",
+    "value": "6b7126d4de892b5c9e78dfa050a0e30798b10aec5cbad6d8f82d4f57f70f7195"
+  },
+  "risk.score_months": {
+    "label": "achieved",
+    "recorded_utc": "2026-11-17T22:04:08+00:00",
+    "source": "risk/score.py",
+    "value": "2014-06..2026-10"
+  },
+  "sens.fragile_flags": {
+    "label": "achieved",
+    "note": "default-flagged units flagged in <60% of runs in at least one family",
+    "recorded_utc": "2026-11-17T22:06:03+00:00",
+    "source": "risk/sensitivity.py",
+    "value": "Drugs/MICRO; Drugs/STERILITY; Food/UNAPPROVED; Food/IMPURITY; Food/PROCESS_SANITATION"
+  },
+  "sens.median_tau_label_noise": {
+    "label": "achieved",
+    "note": "200 runs at noise rate 0.105",
+    "recorded_utc": "2026-11-17T22:06:03+00:00",
+    "source": "risk/sensitivity.py",
+    "value": 0.606
+  },
+  "sens.median_tau_weights": {
+    "label": "achieved",
+    "note": "1,000 Dirichlet draws, both product types pooled, month 2026-10; TARGET >= 0.70",
+    "recorded_utc": "2026-11-17T22:06:03+00:00",
+    "source": "risk/sensitivity.py",
+    "value": 0.735
+  },
+  "sens.n_default_flags": {
+    "label": "achieved",
+    "recorded_utc": "2026-11-17T22:06:03+00:00",
+    "source": "risk/sensitivity.py",
+    "value": 7
+  },
+  "sens.tau_window_24m": {
+    "label": "achieved",
+    "note": "mean over product types",
+    "recorded_utc": "2026-11-17T22:06:03+00:00",
+    "source": "risk/sensitivity.py",
+    "value": 0.328
+  },
+  "sens.tau_window_6m": {
+    "label": "achieved",
+    "note": "mean over product types",
+    "recorded_utc": "2026-11-17T22:06:03+00:00",
+    "source": "risk/sensitivity.py",
+    "value": 0.516
+  },
+  "series.initiation_truncation_months": {
+    "label": "achieved",
+    "note": "ceil(data.lag_p90_days=160.0 / 30.4375); alt series ends 2026-04",
+    "recorded_utc": "2026-11-17T22:03:45+00:00",
+    "source": "analysis/series.py",
+    "value": 6
+  },
+  "series.month_end": {
+    "label": "achieved",
+    "note": "latest partial month excluded",
+    "recorded_utc": "2026-11-17T22:03:45+00:00",
+    "source": "analysis/series.py",
+    "value": "2026-10"
+  },
+  "series.month_start": {
+    "label": "achieved",
+    "recorded_utc": "2026-11-17T22:03:45+00:00",
+    "source": "analysis/series.py",
+    "value": "2012-07"
+  },
+  "series.n_events_in_window": {
+    "label": "achieved",
+    "note": "excludes first partial month 2012-06 and latest partial month 2026-11",
+    "recorded_utc": "2026-11-17T22:03:45+00:00",
+    "source": "analysis/series.py",
+    "value": 12609
+  },
+  "series.n_events_initiation_window": {
+    "label": "achieved",
+    "recorded_utc": "2026-11-17T22:03:45+00:00",
+    "source": "analysis/series.py",
+    "value": 12009
+  },
+  "series.n_months": {
+    "label": "achieved",
+    "recorded_utc": "2026-11-17T22:03:45+00:00",
+    "source": "analysis/series.py",
+    "value": 172
+  },
+  "spc.baseline_window": {
+    "label": "achieved",
+    "recorded_utc": "2026-11-17T22:03:46+00:00",
+    "source": "analysis/spc.py",
+    "value": "2015-01..2019-12"
+  },
+  "spc.c.phase2_signal_months": {
+    "label": "achieved",
+    "note": "R1 26, R2 95 (month can carry both)",
+    "recorded_utc": "2026-11-17T22:03:46+00:00",
+    "source": "analysis/spc.py",
+    "value": 119
+  },
+  "spc.laney_share": {
+    "label": "achieved",
+    "note": "share of monitored charts where sigma_z > 1",
+    "recorded_utc": "2026-11-17T22:03:46+00:00",
+    "source": "analysis/spc.py",
+    "value": 0.469
+  },
+  "spc.n_categories": {
+    "label": "achieved",
+    "note": "monitored product_type x category series (Phase I mean >= 1.0/month, excl. Unclassified)",
+    "recorded_utc": "2026-11-17T22:03:46+00:00",
+    "source": "analysis/spc.py",
+    "value": 16
+  },
+  "spc.n_categories_with_signal": {
+    "label": "achieved",
+    "note": "p-chart, Phase II",
+    "recorded_utc": "2026-11-17T22:03:46+00:00",
+    "source": "analysis/spc.py",
+    "value": 13
+  },
+  "spc.n_signals": {
+    "label": "achieved",
+    "note": "p-chart Phase II signalled category-months",
+    "recorded_utc": "2026-11-17T22:03:46+00:00",
+    "source": "analysis/spc.py",
+    "value": 91
+  },
+  "spc.p.phase2_signal_months": {
+    "label": "achieved",
+    "note": "R1 44, R2 51 (month can carry both)",
+    "recorded_utc": "2026-11-17T22:03:46+00:00",
+    "source": "analysis/spc.py",
+    "value": 91
+  },
+  "spc.sim_lambda1.any_signal_series": {
+    "label": "achieved",
+    "note": "max of (share of series with >=1 R1, with >=1 R2)",
+    "recorded_utc": "2026-11-17T22:03:47+00:00",
+    "source": "analysis/spc.py",
+    "value": 0.454
+  },
+  "spc.sim_lambda1.r1_per_point": {
+    "label": "achieved",
+    "note": "1,000 stable Poisson series, n=60, seed 42; normal theory 0.0027",
+    "recorded_utc": "2026-11-17T22:03:47+00:00",
+    "source": "analysis/spc.py",
+    "value": 0.0081
+  },
+  "spc.sim_lambda1.r2_per_point": {
+    "label": "achieved",
+    "recorded_utc": "2026-11-17T22:03:47+00:00",
+    "source": "analysis/spc.py",
+    "value": 0.0271
+  },
+  "spc.sim_lambda10.any_signal_series": {
+    "label": "achieved",
+    "note": "max of (share of series with >=1 R1, with >=1 R2)",
+    "recorded_utc": "2026-11-17T22:03:47+00:00",
+    "source": "analysis/spc.py",
+    "value": 0.183
+  },
+  "spc.sim_lambda10.r1_per_point": {
+    "label": "achieved",
+    "note": "1,000 stable Poisson series, n=60, seed 42; normal theory 0.0027",
+    "recorded_utc": "2026-11-17T22:03:47+00:00",
+    "source": "analysis/spc.py",
+    "value": 0.0019
+  },
+  "spc.sim_lambda10.r2_per_point": {
+    "label": "achieved",
+    "recorded_utc": "2026-11-17T22:03:47+00:00",
+    "source": "analysis/spc.py",
+    "value": 0.0061
+  },
+  "spc.sim_lambda3.any_signal_series": {
+    "label": "achieved",
+    "note": "max of (share of series with >=1 R1, with >=1 R2)",
+    "recorded_utc": "2026-11-17T22:03:47+00:00",
+    "source": "analysis/spc.py",
+    "value": 0.253
+  },
+  "spc.sim_lambda3.r1_per_point": {
+    "label": "achieved",
+    "note": "1,000 stable Poisson series, n=60, seed 42; normal theory 0.0027",
+    "recorded_utc": "2026-11-17T22:03:47+00:00",
+    "source": "analysis/spc.py",
+    "value": 0.0044
+  },
+  "spc.sim_lambda3.r2_per_point": {
+    "label": "achieved",
+    "recorded_utc": "2026-11-17T22:03:47+00:00",
+    "source": "analysis/spc.py",
+    "value": 0.0102
+  },
+  "spc.sim_lambda30.any_signal_series": {
+    "label": "achieved",
+    "note": "max of (share of series with >=1 R1, with >=1 R2)",
+    "recorded_utc": "2026-11-17T22:03:47+00:00",
+    "source": "analysis/spc.py",
+    "value": 0.152
+  },
+  "spc.sim_lambda30.r1_per_point": {
+    "label": "achieved",
+    "note": "1,000 stable Poisson series, n=60, seed 42; normal theory 0.0027",
+    "recorded_utc": "2026-11-17T22:03:47+00:00",
+    "source": "analysis/spc.py",
+    "value": 0.0018
+  },
+  "spc.sim_lambda30.r2_per_point": {
+    "label": "achieved",
+    "recorded_utc": "2026-11-17T22:03:47+00:00",
+    "source": "analysis/spc.py",
+    "value": 0.0046
+  },
+  "spc.window_signal_range": {
+    "label": "achieved",
+    "note": "p-chart Phase II signals across 4 baseline windows",
+    "recorded_utc": "2026-11-17T21:46:05+00:00",
+    "source": "reports/tables/spc_window_sensitivity.csv",
+    "value": [
+      39,
+      192
+    ]
+  },
+  "trend.n_negative_binomial": {
+    "label": "achieved",
+    "recorded_utc": "2026-11-17T22:03:53+00:00",
+    "source": "analysis/trend.py",
+    "value": 4
+  },
+  "trend.n_significant_q05": {
+    "label": "achieved",
+    "recorded_utc": "2026-11-17T22:03:53+00:00",
+    "source": "analysis/trend.py",
+    "value": 0
+  },
+  "trend.n_tested": {
+    "label": "achieved",
+    "note": "window 2021-11..2026-10",
+    "recorded_utc": "2026-11-17T22:03:53+00:00",
+    "source": "analysis/trend.py",
+    "value": 19
+  }
+}

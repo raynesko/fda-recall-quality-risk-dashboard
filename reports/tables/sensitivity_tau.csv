@@ -1,0 +1,9 @@
+family,product_type,tau
+label_noise,Drugs,0.74
+label_noise,Food,0.452
+weights,Drugs,0.718
+weights,Food,0.735
+window_24m,Drugs,0.256
+window_24m,Food,0.4
+window_6m,Drugs,0.564
+window_6m,Food,0.468

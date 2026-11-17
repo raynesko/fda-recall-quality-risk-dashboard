@@ -1,0 +1,183 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.6.0/schema.json",
+  "name": "p3_chart",
+  "position": {
+    "x": 20,
+    "y": 125,
+    "z": 5,
+    "width": 830,
+    "height": 330,
+    "tabOrder": 5
+  },
+  "visual": {
+    "visualType": "lineChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dash_spc"
+                    }
+                  },
+                  "Property": "month"
+                }
+              },
+              "queryRef": "dash_spc.month",
+              "nativeQueryRef": "month",
+              "displayName": "Month"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dash_spc"
+                    }
+                  },
+                  "Property": "SPC Value"
+                }
+              },
+              "queryRef": "dash_spc.SPC Value",
+              "nativeQueryRef": "SPC Value",
+              "displayName": "Value"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dash_spc"
+                    }
+                  },
+                  "Property": "SPC CL"
+                }
+              },
+              "queryRef": "dash_spc.SPC CL",
+              "nativeQueryRef": "SPC CL",
+              "displayName": "Centre line"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dash_spc"
+                    }
+                  },
+                  "Property": "SPC UCL"
+                }
+              },
+              "queryRef": "dash_spc.SPC UCL",
+              "nativeQueryRef": "SPC UCL",
+              "displayName": "Upper control limit"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dash_spc"
+                    }
+                  },
+                  "Property": "SPC LCL"
+                }
+              },
+              "queryRef": "dash_spc.SPC LCL",
+              "nativeQueryRef": "SPC LCL",
+              "displayName": "Lower control limit"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dash_spc"
+                    }
+                  },
+                  "Property": "SPC Signal Point"
+                }
+              },
+              "queryRef": "dash_spc.SPC Signal Point",
+              "nativeQueryRef": "SPC Signal Point",
+              "displayName": "Signal (special cause)"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Selected category: points outside the limits or long runs are signals'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "12.0D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true,
+    "objects": {
+      "lineStyles": [
+        {
+          "properties": {
+            "showMarker": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "showMarker": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "strokeWidth": {
+              "expr": {
+                "Literal": {
+                  "Value": "0L"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "dash_spc.SPC Signal Point"
+          }
+        }
+      ]
+    }
+  }
+}

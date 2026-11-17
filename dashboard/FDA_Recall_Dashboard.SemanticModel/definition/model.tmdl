@@ -1,0 +1,23 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+ref table fact_recall_event
+ref table fact_recall_product
+ref table dim_date
+ref table dim_firm
+ref table dim_category
+ref table dim_product_type
+ref table dash_kpi
+ref table dash_pareto
+ref table dash_spc
+ref table dash_watchlist
+ref table dash_watch_components
+ref table dash_actions
+ref table dash_notes
+
+ref expression DataFolder

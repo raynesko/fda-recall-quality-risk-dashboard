@@ -1,0 +1,111 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.6.0/schema.json",
+  "name": "p4_components",
+  "position": {
+    "x": 850,
+    "y": 120,
+    "z": 4,
+    "width": 410,
+    "height": 300,
+    "tabOrder": 4
+  },
+  "visual": {
+    "visualType": "barChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_category"
+                    }
+                  },
+                  "Property": "category_id"
+                }
+              },
+              "queryRef": "dim_category.category_id",
+              "nativeQueryRef": "category_id",
+              "displayName": "Category"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dash_watch_components"
+                        }
+                      },
+                      "Property": "weighted_contribution"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(dash_watch_components.weighted_contribution)",
+              "nativeQueryRef": "Sum of weighted_contribution",
+              "displayName": "Contribution"
+            }
+          ]
+        },
+        "Series": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dash_watch_components"
+                    }
+                  },
+                  "Property": "component"
+                }
+              },
+              "queryRef": "dash_watch_components.component",
+              "nativeQueryRef": "component",
+              "displayName": "Component"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'What makes up each score (weighted components)'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "12.0D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

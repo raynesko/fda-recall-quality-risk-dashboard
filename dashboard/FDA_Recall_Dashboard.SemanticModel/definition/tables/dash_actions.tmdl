@@ -1,0 +1,59 @@
+table dash_actions
+
+	column category
+		dataType: string
+		summarizeBy: none
+		sourceColumn: category
+
+	column product_scope
+		dataType: string
+		summarizeBy: none
+		sourceColumn: product_scope
+
+	column phase
+		dataType: string
+		summarizeBy: none
+		sourceColumn: phase
+
+	column action
+		dataType: string
+		summarizeBy: none
+		sourceColumn: action
+
+	column owner_function
+		dataType: string
+		summarizeBy: none
+		sourceColumn: owner_function
+
+	column metric
+		dataType: string
+		summarizeBy: none
+		sourceColumn: metric
+
+	column citation
+		dataType: string
+		summarizeBy: none
+		sourceColumn: citation
+
+	column citation_verified
+		dataType: string
+		summarizeBy: none
+		sourceColumn: citation_verified
+
+	column source_url
+		dataType: string
+		summarizeBy: none
+		sourceColumn: source_url
+
+	column phase_order
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: phase_order
+
+	partition dash_actions = m
+		mode: import
+		source =
+				let
+				    Source = Parquet.Document(File.Contents(DataFolder & "dashboard\dash_actions.parquet"))
+				in
+				    Source

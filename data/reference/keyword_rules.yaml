@@ -1,0 +1,20 @@
+# Keyword/regex BASELINE classifier (T3.2.1). Written from taxonomy v1.1 + text EDA (notebooks/03_text_eda.ipynb)
+# BEFORE any gold labels existed. Do not edit after the first gold evaluation (commit hash recorded in
+# reports/classifier_eval.md). Matching is case-insensitive on normalized text (lowercase, single spaces).
+# Every category whose pattern matches is a candidate; the earliest in taxonomy tie_break_priority wins.
+# No match -> OTHER.
+version: 1
+rules:
+  ALLERGEN: '\ballergen|(?:undeclared|not declared|undisclosed|may contain|contains?)\W+(?:\w+\W+){0,4}?(?:milk|eggs?|wheat|soy|soybeans?|peanuts?|tree ?nuts?|almonds?|cashews?|walnuts?|pecans?|hazelnuts?|pistachios?|macadamia|fish|shellfish|shrimp|crab|lobster|sesame|sulfites?|sulphites?|yellow (?:no\.? ?)?5|tartrazine|gluten)\b'
+  STERILITY: 'sterility|aseptic'
+  MICRO: 'listeria|salmonella|e\.? ?coli|\bstec\b|o157|cronobacter|cyclospora|hepatitis a|norovirus|vibrio|burkholderia|pseudomonas|bacillus cereus|staphylococcus|microbial|microbiolog|bacteri|\bmou?ld\b|yeast|fung'
+  IMPURITY: 'impurit|degradant|degradation|nitros|\bnd[me]a\b|\bnmba\b|benzene|\blead\b|arsenic|cadmium|mercury|heavy metal|aflatoxin|mycotoxin|patulin|pesticide|residual solvent|chemical contamina|diethylene glycol|ethylene glycol|methanol|carcinogen'
+  UNAPPROVED: 'without an approved|unapproved|sildenafil|tadalafil|vardenafil|sibutramine|phenolphthalein|undeclared (?:drug|active|pharmaceutical)|hidden drug|new drug application'
+  FOREIGN: 'particulate|\bglass\b|pieces? of (?:metal|plastic|glass|rubber|wood)|(?:metal|glass|plastic|rubber|wood)(?:en)? (?:fragments?|pieces?|shavings?|particles?|shards?)|foreign (?!tablets?|capsules?|products?)(?:material|matter|objects?|bod(?:y|ies)|substances?)'
+  MIXUP: 'mix-? ?up|foreign (?:tablets?|capsules?)|wrong (?:product|drug|label|strength|tablet)|commingl|incorrect product|another product|cross[- ]?contaminat|mislabeled as'
+  POTENCY: 'subpoten|superpoten|potency|\bassay\b|content uniformity'
+  SPEC_FAIL: 'dissolution|stability|out of specification|\boos\b|specification|\bph\b|viscosity'
+  PACKAGING: 'defective (?:container|delivery|seal|cap|closure|pump|valve|packag)|delivery system|leak|crack|\bseals?\b|closure|child[- ]resistant|container defect|broken'
+  PROCESS_SANITATION: 'insanitary|unsanitary|under[- ]?process|inadequate(?:ly)? process|temperature|refrigerat|botulin|acidif|haccp|pasteuri|thermal process|filth|rodent|insect'
+  LABELING: 'label|misbrand|package insert|expiration|exp\.? date|lot number|nutrition facts|net weight|not elsewhere classified'
+  CGMP: 'cgmp|good manufacturing|\bgmp\b'

@@ -1,0 +1,13 @@
+product_type,period,comparison,kendall_tau_b
+Drugs,full,count vs severity,0.821
+Drugs,full,count vs class1,0.323
+Drugs,full,count vs single_match_only,0.513
+Drugs,trailing_60m,count vs severity,0.748
+Drugs,trailing_60m,count vs class1,-0.031
+Drugs,trailing_60m,count vs single_match_only,0.473
+Food,full,count vs severity,1.0
+Food,full,count vs class1,0.711
+Food,full,count vs single_match_only,0.923
+Food,trailing_60m,count vs severity,1.0
+Food,trailing_60m,count vs class1,0.627
+Food,trailing_60m,count vs single_match_only,0.974

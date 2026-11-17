@@ -1,0 +1,35 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.6.0/schema.json",
+  "name": "p4_limits",
+  "position": {
+    "x": 850,
+    "y": 425,
+    "z": 6,
+    "width": 410,
+    "height": 260,
+    "tabOrder": 6
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Limitations. Counts are FDA-recorded recall events with no production denominator, so they are not failure rates. FDA classification and enforcement priorities shape what is recorded. Categories come from keyword rules (~0.90 precision; Unclassified shown). USDA-FSIS meat/poultry recalls are excluded. Generic, hypothesis-level QA actions inferred from category-level patterns in public openFDA recall (enforcement) data. Not findings about any named firm, not regulatory or legal advice, and not a substitute for a site's own risk assessment. Built from openFDA data - not for clinical or regulatory decisions.",
+                    "textStyle": {
+                      "fontSize": "9pt"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

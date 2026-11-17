@@ -1,0 +1,34 @@
+table dash_watch_components
+
+	column product_type
+		dataType: string
+		summarizeBy: none
+		sourceColumn: product_type
+
+	column category
+		dataType: string
+		summarizeBy: none
+		sourceColumn: category
+
+	column component
+		dataType: string
+		summarizeBy: none
+		sourceColumn: component
+
+	column percentile
+		dataType: double
+		summarizeBy: none
+		sourceColumn: percentile
+
+	column weighted_contribution
+		dataType: double
+		summarizeBy: none
+		sourceColumn: weighted_contribution
+
+	partition dash_watch_components = m
+		mode: import
+		source =
+				let
+				    Source = Parquet.Document(File.Contents(DataFolder & "dashboard\dash_watch_components.parquet"))
+				in
+				    Source

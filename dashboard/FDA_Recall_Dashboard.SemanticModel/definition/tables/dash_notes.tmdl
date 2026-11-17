@@ -1,0 +1,19 @@
+table dash_notes
+
+	column key
+		dataType: string
+		summarizeBy: none
+		sourceColumn: key
+
+	column text
+		dataType: string
+		summarizeBy: none
+		sourceColumn: text
+
+	partition dash_notes = m
+		mode: import
+		source =
+				let
+				    Source = Parquet.Document(File.Contents(DataFolder & "dashboard\dash_notes.parquet"))
+				in
+				    Source

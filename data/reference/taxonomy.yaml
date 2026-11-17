@@ -1,0 +1,125 @@
+# Root-cause taxonomy v1 (T1.1.2). Categories describe the STATED reason for recall, not a verified root cause.
+# Single label per event. When several categories apply, the category that appears EARLIER in
+# tie_break_priority wins (specific hazard beats generic system failure). See docs/domain/root-cause-taxonomy.md.
+# system_or_hazard:
+#   drug  -> FDA CP 7356.002 six systems (Quality; Facilities and Equipment; Materials; Production;
+#            Packaging and Labeling; Laboratory Control) - verified from https://www.fda.gov/media/75167/download (p.11)
+#   food  -> hazard class used in FSMA hazard analysis: biological, chemical, physical (FDA FSMA PC rule page);
+#            "allergen" is listed separately because the PC rule names food allergen controls as their own control type.
+# Mappings marked with "(judgement)" are the builder's design choice, not an FDA-defined mapping.
+version: 1.1
+frozen: false
+tie_break_priority: [ALLERGEN, STERILITY, MICRO, IMPURITY, UNAPPROVED, FOREIGN, MIXUP, POTENCY, SPEC_FAIL, PACKAGING, PROCESS_SANITATION, LABELING, CGMP, OTHER]
+categories:
+  - id: ALLERGEN
+    name: "Undeclared allergen / sensitivity ingredient"
+    definition: "Product contains a food allergen or labeled-sensitivity ingredient (e.g., sulfites, FD&C Yellow No. 5) that is not declared on the label."
+    examples: ["undeclared milk", "product contains undeclared peanuts", "undeclared sulfites", "undeclared wheat (gluten)"]
+    include: "Any undeclared food allergen or sensitivity ingredient, including when caused by a label/packaging mix-up."
+    exclude: "Undeclared DRUG ingredients (sildenafil, tadalafil, etc.) -> UNAPPROVED. Allergen cross-contact risk with no undeclared statement -> PROCESS_SANITATION."
+    applies_to: both
+    system_or_hazard: {drug: Packaging and Labeling (judgement), food: allergen}
+  - id: STERILITY
+    name: "Lack of sterility assurance"
+    definition: "Sterile product (or product labeled sterile) without assurance of sterility, or non-sterility confirmed."
+    examples: ["lack of assurance of sterility", "lack of sterility assurance", "non-sterility", "sterility test failure"]
+    include: "Sterility assurance or aseptic-processing failures, including compounded sterile preparations."
+    exclude: "Microbial contamination of NON-sterile products -> MICRO."
+    applies_to: drug
+    system_or_hazard: {drug: Production (judgement; sterile processing also covered by CP 7356.002A - UNVERIFIED scope), food: n/a}
+  - id: MICRO
+    name: "Microbial contamination"
+    definition: "Pathogen, mold, yeast or other microbial contamination, confirmed or potential, in a non-sterile product."
+    examples: ["potential listeria monocytogenes contamination", "product may be contaminated with salmonella", "microbial contamination of non-sterile products", "e. coli o157:h7", "mold"]
+    include: "Named organisms or 'microbial contamination'; potential contamination linked to a specific organism."
+    exclude: "Sterility-assurance failures -> STERILITY. Botulism risk from under-processing with no organism found -> PROCESS_SANITATION."
+    applies_to: both
+    system_or_hazard: {drug: Laboratory Control (judgement; detection) / Production, food: biological}
+  - id: IMPURITY
+    name: "Chemical contamination / impurity"
+    definition: "Unwanted chemical present or out of limit - degradation products, nitrosamines (NDMA etc.), solvents, heavy metals, pesticides, toxins."
+    examples: ["failed impurities/degradation specifications", "cgmp deviations: presence of ndma impurity", "elevated levels of lead", "benzene", "aflatoxin", "chemical contamination"]
+    include: "Named chemical contaminants or impurity/degradant failures."
+    exclude: "Assay/potency out of limit -> POTENCY. Undeclared active drug ingredient -> UNAPPROVED."
+    applies_to: both
+    system_or_hazard: {drug: Materials (judgement) / Laboratory Control, food: chemical}
+  - id: UNAPPROVED
+    name: "Unapproved / adulterated product status"
+    definition: "Product marketed without required approval, or containing an undeclared or unapproved drug ingredient."
+    examples: ["marketed without an approved nda/anda", "contains undeclared sildenafil", "tainted with undeclared tadalafil", "unapproved new drug"]
+    include: "Regulatory-status recalls and hidden active pharmaceutical ingredients (often in dietary supplements)."
+    exclude: "Approved product with a quality failure -> the relevant quality category."
+    applies_to: both
+    system_or_hazard: {drug: Quality (judgement; regulatory status, no single system), food: chemical (judgement)}
+  - id: FOREIGN
+    name: "Foreign material / particulate"
+    definition: "Physical foreign matter (metal, glass, plastic, rubber, particulates) in product."
+    examples: ["presence of particulate matter", "may contain pieces of metal", "glass fragments", "hard plastic pieces"]
+    include: "Any physical extraneous material."
+    exclude: "Wrong tablets/capsules of another product -> MIXUP."
+    applies_to: both
+    system_or_hazard: {drug: Production / Facilities and Equipment (judgement), food: physical}
+  - id: MIXUP
+    name: "Product mix-up / cross-contamination"
+    definition: "Wrong product, strength or unit in package; co-mingling of products; cross-contamination with another drug product."
+    examples: ["presence of foreign tablets/capsules", "wrong product in container", "bottle labeled as x contains y", "cross contamination with other products", "labeling: label mix-up"]
+    include: "Mix-ups where the hazard is the wrong product, not a missing allergen declaration."
+    exclude: "Mix-up that results in an undeclared allergen -> ALLERGEN."
+    applies_to: both
+    system_or_hazard: {drug: Packaging and Labeling / Production (judgement), food: chemical or allergen depending on product (judgement)}
+  - id: POTENCY
+    name: "Potency / assay failure"
+    definition: "Active ingredient content out of specification (subpotent or superpotent), including content uniformity."
+    examples: ["subpotent drug", "superpotent", "failed assay", "content uniformity failure"]
+    include: "Assay, potency or uniformity failures."
+    exclude: "Failing dissolution/stability with assay passing -> SPEC_FAIL."
+    applies_to: both
+    system_or_hazard: {drug: Laboratory Control, food: chemical (judgement; e.g., vitamin overages)}
+  - id: SPEC_FAIL
+    name: "Dissolution / stability / other specification failure (OOS)"
+    definition: "Failed dissolution, stability, pH, viscosity or other quality specification not covered by a more specific category."
+    examples: ["failed dissolution specifications", "failed stability specifications", "out of specification", "failed ph specification", "failed tablet/capsule specifications"]
+    include: "Quality-attribute test failures not about impurity, potency or sterility."
+    exclude: "Impurity/degradant failures -> IMPURITY; assay -> POTENCY."
+    applies_to: both
+    system_or_hazard: {drug: Laboratory Control, food: n/a (rare)}
+  - id: PACKAGING
+    name: "Packaging / container-closure / delivery-system defect"
+    definition: "Defect in container, seal, closure or delivery device (leaks, cracks, defective pump or inhaler)."
+    examples: ["defective container", "defective delivery system", "leaking bottles", "compromised seal", "child-resistant packaging failure"]
+    include: "Physical package or device integrity failures."
+    exclude: "Label content errors -> LABELING; packaging that introduced fragments -> FOREIGN."
+    applies_to: both
+    system_or_hazard: {drug: Packaging and Labeling, food: physical (judgement) or biological if seal integrity}
+  - id: PROCESS_SANITATION
+    name: "Inadequate processing, sanitation or storage control"
+    definition: "Process, temperature or sanitation failure with POTENTIAL hazard but no specific contaminant named (under-processing, temperature abuse, insanitary conditions, allergen cross-contact risk)."
+    examples: ["prepared, packed, or held under insanitary conditions", "under processing", "potential for clostridium botulinum due to inadequate processing", "temperature abuse"]
+    include: "Process-control and sanitation failures for food; storage/temperature excursions for both."
+    exclude: "Named organism detected or implicated -> MICRO (except botulism risk inferred only from process failure)."
+    applies_to: both
+    system_or_hazard: {drug: Production / Facilities and Equipment (judgement), food: biological}
+  - id: LABELING
+    name: "Labeling error (non-allergen)"
+    definition: "Incorrect, missing or misleading label content other than an undeclared allergen."
+    examples: ["labeling: incorrect or missing lot and/or exp date", "labeling: incorrect or missing package insert", "misbranded", "label error on declared strength", "labeling: not elsewhere classified"]
+    include: "Lot/expiry, package insert, strength, nutrition/ingredient statements (non-allergen), misbranding."
+    exclude: "Undeclared allergen -> ALLERGEN; wrong product inside correct label -> MIXUP."
+    applies_to: both
+    system_or_hazard: {drug: Packaging and Labeling, food: n/a (labeling; judgement)}
+  - id: CGMP
+    name: "CGMP / quality-system deviation (non-specific)"
+    definition: "CGMP deviations or quality-system failures stated without a more specific defect."
+    examples: ["cgmp deviations", "products manufactured under cgmp deviations", "not manufactured under current good manufacturing practices"]
+    include: "Generic CGMP statements only."
+    exclude: "Any more specific hazard in the same text wins (e.g., 'cgmp deviations: presence of ndma' -> IMPURITY)."
+    applies_to: both
+    system_or_hazard: {drug: Quality, food: n/a (CGMP under 21 CFR 117 Subpart B; judgement)}
+  - id: OTHER
+    name: "Other / unclear"
+    definition: "Reason is too vague to classify or fits no category."
+    examples: ["precautionary measure", "voluntary recall", "firm decided to recall"]
+    include: "Use only if no other category's include rule matches after reading the full text."
+    exclude: "Do not use for texts that match any category; target < 5% of gold labels."
+    applies_to: both
+    system_or_hazard: {drug: n/a, food: n/a}

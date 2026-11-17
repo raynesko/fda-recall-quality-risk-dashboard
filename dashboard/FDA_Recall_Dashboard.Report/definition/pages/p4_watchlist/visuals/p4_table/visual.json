@@ -1,0 +1,176 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.6.0/schema.json",
+  "name": "p4_table",
+  "position": {
+    "x": 20,
+    "y": 120,
+    "z": 3,
+    "width": 820,
+    "height": 300,
+    "tabOrder": 3
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dash_watchlist"
+                    }
+                  },
+                  "Property": "rank"
+                }
+              },
+              "queryRef": "dash_watchlist.rank",
+              "nativeQueryRef": "rank",
+              "displayName": "Rank"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dash_watchlist"
+                    }
+                  },
+                  "Property": "product_type"
+                }
+              },
+              "queryRef": "dash_watchlist.product_type",
+              "nativeQueryRef": "product_type",
+              "displayName": "Type"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_category"
+                    }
+                  },
+                  "Property": "category_id"
+                }
+              },
+              "queryRef": "dim_category.category_id",
+              "nativeQueryRef": "category_id",
+              "displayName": "Category"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dash_watchlist"
+                    }
+                  },
+                  "Property": "flag_label"
+                }
+              },
+              "queryRef": "dash_watchlist.flag_label",
+              "nativeQueryRef": "flag_label",
+              "displayName": "Flag"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dash_watchlist"
+                    }
+                  },
+                  "Property": "Score"
+                }
+              },
+              "queryRef": "dash_watchlist.Score",
+              "nativeQueryRef": "Score",
+              "displayName": "Score"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dash_watchlist"
+                    }
+                  },
+                  "Property": "stability_pct"
+                }
+              },
+              "queryRef": "dash_watchlist.stability_pct",
+              "nativeQueryRef": "stability_pct",
+              "displayName": "Stability %"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dash_watchlist"
+                    }
+                  },
+                  "Property": "why_flagged"
+                }
+              },
+              "queryRef": "dash_watchlist.why_flagged",
+              "nativeQueryRef": "why_flagged",
+              "displayName": "Why flagged"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "dash_watchlist"
+                  }
+                },
+                "Property": "Score"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": false
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Ranked categories (latest complete month) - click a row for QA actions'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "12.0D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

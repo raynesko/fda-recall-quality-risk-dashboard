@@ -1,0 +1,24 @@
+{
+  "files": [
+    {
+      "endpoint": "drug",
+      "url": "https://download.open.fda.gov/drug/enforcement/drug-enforcement-0001-of-0001.json.zip",
+      "path": "drug/2026-11-16/drug-enforcement-0001-of-0001.json.zip",
+      "retrieved_utc": "2026-11-16T04:53:13+00:00",
+      "rows": 18110,
+      "sha256": "76e8c96a1c66587209eda24d2049e434da9707b7287a81eccdea4e111d833d4c",
+      "api_total_at_retrieval": 18110,
+      "rows_match_api_total": true
+    },
+    {
+      "endpoint": "food",
+      "url": "https://download.open.fda.gov/food/enforcement/food-enforcement-0001-of-0001.json.zip",
+      "path": "food/2026-11-16/food-enforcement-0001-of-0001.json.zip",
+      "retrieved_utc": "2026-11-16T04:53:14+00:00",
+      "rows": 29598,
+      "sha256": "225baa74277e41160052c48c5d2d79ac9d7d4ff7cacaec8578bdfa33882b4bc5",
+      "api_total_at_retrieval": 29598,
+      "rows_match_api_total": true
+    }
+  ]
+}

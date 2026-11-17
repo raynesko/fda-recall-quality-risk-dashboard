@@ -1,0 +1,67 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.6.0/schema.json",
+  "name": "p1_card_flags",
+  "position": {
+    "x": 950,
+    "y": 140,
+    "z": 7,
+    "width": 310,
+    "height": 110,
+    "tabOrder": 7
+  },
+  "visual": {
+    "visualType": "card",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dash_watchlist"
+                    }
+                  },
+                  "Property": "Flagged Categories"
+                }
+              },
+              "queryRef": "dash_watchlist.Flagged Categories",
+              "nativeQueryRef": "Flagged Categories",
+              "displayName": "Flagged categories (risk watchlist)"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Flagged categories (risk watchlist)'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "11.0D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

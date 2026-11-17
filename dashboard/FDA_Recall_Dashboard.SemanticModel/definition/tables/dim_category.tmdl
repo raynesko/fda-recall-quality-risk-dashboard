@@ -1,0 +1,29 @@
+table dim_category
+
+	column category_id
+		dataType: string
+		summarizeBy: none
+		sourceColumn: category_id
+
+	column category_name
+		dataType: string
+		summarizeBy: none
+		sourceColumn: category_name
+
+	column product_scope
+		dataType: string
+		summarizeBy: none
+		sourceColumn: product_scope
+
+	column tie_break_rank
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: tie_break_rank
+
+	partition dim_category = m
+		mode: import
+		source =
+				let
+				    Source = Parquet.Document(File.Contents(DataFolder & "star\dim_category.parquet"))
+				in
+				    Source

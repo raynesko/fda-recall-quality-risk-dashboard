@@ -1,0 +1,121 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.6.0/schema.json",
+  "name": "p3_top6",
+  "position": {
+    "x": 550,
+    "y": 460,
+    "z": 8,
+    "width": 710,
+    "height": 225,
+    "tabOrder": 8
+  },
+  "visual": {
+    "visualType": "lineChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dash_spc"
+                    }
+                  },
+                  "Property": "month"
+                }
+              },
+              "queryRef": "dash_spc.month",
+              "nativeQueryRef": "month",
+              "displayName": "Month"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dash_spc"
+                    }
+                  },
+                  "Property": "Top6 Share"
+                }
+              },
+              "queryRef": "dash_spc.Top6 Share",
+              "nativeQueryRef": "Top6 Share",
+              "displayName": "Share of month"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dash_spc"
+                    }
+                  },
+                  "Property": "Top6 UCL"
+                }
+              },
+              "queryRef": "dash_spc.Top6 UCL",
+              "nativeQueryRef": "Top6 UCL",
+              "displayName": "UCL"
+            }
+          ]
+        },
+        "Rows": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dash_spc"
+                    }
+                  },
+                  "Property": "series"
+                }
+              },
+              "queryRef": "dash_spc.series",
+              "nativeQueryRef": "series",
+              "displayName": "Series"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Top 6 categories (p-chart small multiples)'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "12.0D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

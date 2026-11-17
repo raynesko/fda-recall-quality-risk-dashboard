@@ -1,0 +1,54 @@
+table fact_recall_product
+
+	column recall_number
+		dataType: string
+		summarizeBy: none
+		sourceColumn: recall_number
+
+	column event_id
+		dataType: string
+		summarizeBy: none
+		sourceColumn: event_id
+
+	column product_type
+		dataType: string
+		summarizeBy: none
+		sourceColumn: product_type
+
+	column classification
+		dataType: string
+		summarizeBy: none
+		sourceColumn: classification
+
+	column status
+		dataType: string
+		summarizeBy: none
+		sourceColumn: status
+
+	column product_description
+		dataType: string
+		summarizeBy: none
+		sourceColumn: product_description
+
+	column product_quantity
+		dataType: string
+		summarizeBy: none
+		sourceColumn: product_quantity
+
+	column distribution_pattern
+		dataType: string
+		summarizeBy: none
+		sourceColumn: distribution_pattern
+
+	column recall_number_missing
+		dataType: boolean
+		summarizeBy: none
+		sourceColumn: recall_number_missing
+
+	partition fact_recall_product = m
+		mode: import
+		source =
+				let
+				    Source = Parquet.Document(File.Contents(DataFolder & "star\fact_recall_product.parquet"))
+				in
+				    Source

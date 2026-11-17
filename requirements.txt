@@ -1,0 +1,22 @@
+# Direct dependencies, pinned 2026-11-17 from a clean venv (Python 3.12.10) after a full pipeline run
+# (jupyterlab version taken from the project venv; it failed in the clean venv only because of the Windows
+# 260-char path limit in a deep temp folder). Full transitive lock: requirements-lock.txt
+pandas==3.1.1
+numpy==2.5.5
+scipy==1.18.1
+statsmodels==0.15.0
+scikit-learn==1.9.1
+matplotlib==3.11.2
+pyarrow==26.0.1
+duckdb==2.0.0
+requests==2.34.2
+pyyaml==6.0.3
+tabulate==0.10.0
+joblib==1.6.0
+jupyterlab==4.6.6
+pytest==9.2.0
+ruff==0.17.5
+jsonschema==4.26.0
+referencing==0.37.0
+# Optional stretch (T3.2.3) - keep out of the core install:
+# sentence-transformers>=2.7

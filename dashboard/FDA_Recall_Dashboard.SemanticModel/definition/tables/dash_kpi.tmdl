@@ -1,0 +1,56 @@
+table dash_kpi
+
+	measure 'Data As Of' = "Data as of " & FIRSTNONBLANK(dash_kpi[data_as_of], 1) & " (report date). " & FIRSTNONBLANK(dash_kpi[footer], 1)
+
+	column product_type
+		dataType: string
+		summarizeBy: none
+		sourceColumn: product_type
+
+	column events_trailing_12m
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: events_trailing_12m
+
+	column events_prior_12m
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: events_prior_12m
+
+	column change_pct
+		dataType: double
+		summarizeBy: none
+		sourceColumn: change_pct
+
+	column class1_share_trailing_12m
+		dataType: double
+		summarizeBy: none
+		sourceColumn: class1_share_trailing_12m
+
+	column flagged_categories
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: flagged_categories
+
+	column window
+		dataType: string
+		summarizeBy: none
+		sourceColumn: window
+
+	column data_as_of
+		dataType: string
+		summarizeBy: none
+		sourceColumn: data_as_of
+
+	column footer
+		dataType: string
+		summarizeBy: none
+		sourceColumn: footer
+
+	partition dash_kpi = m
+		mode: import
+		source =
+				let
+				    Source = Parquet.Document(File.Contents(DataFolder & "dashboard\dash_kpi.parquet"))
+				in
+				    Source

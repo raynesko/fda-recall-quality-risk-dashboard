@@ -1,0 +1,43 @@
+relationship rel_01_fact_recall_event_firm_key
+	fromColumn: fact_recall_event.firm_key
+	toColumn: dim_firm.firm_key
+
+relationship rel_02_fact_recall_event_category_id
+	fromColumn: fact_recall_event.category_id
+	toColumn: dim_category.category_id
+
+relationship rel_03_fact_recall_event_report_date_key
+	fromColumn: fact_recall_event.report_date_key
+	toColumn: dim_date.date_key
+
+relationship rel_04_fact_recall_event_product_type
+	fromColumn: fact_recall_event.product_type
+	toColumn: dim_product_type.product_type
+
+relationship rel_05_fact_recall_product_event_id
+	fromColumn: fact_recall_product.event_id
+	toColumn: fact_recall_event.event_id
+
+relationship rel_06_dash_pareto_category
+	fromColumn: dash_pareto.category
+	toColumn: dim_category.category_id
+
+relationship rel_07_dash_watchlist_category
+	fromColumn: dash_watchlist.category
+	toColumn: dim_category.category_id
+
+relationship rel_08_dash_watchlist_product_type
+	fromColumn: dash_watchlist.product_type
+	toColumn: dim_product_type.product_type
+
+relationship rel_09_dash_watch_components_category
+	fromColumn: dash_watch_components.category
+	toColumn: dim_category.category_id
+
+relationship rel_10_dash_watch_components_product_type
+	fromColumn: dash_watch_components.product_type
+	toColumn: dim_product_type.product_type
+
+relationship rel_11_dash_actions_category
+	fromColumn: dash_actions.category
+	toColumn: dim_category.category_id

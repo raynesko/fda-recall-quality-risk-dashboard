@@ -1,0 +1,35 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.6.0/schema.json",
+  "name": "p3_explain",
+  "position": {
+    "x": 860,
+    "y": 125,
+    "z": 6,
+    "width": 400,
+    "height": 330,
+    "tabOrder": 6
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "How to read this chart. Common-cause variation = normal month-to-month noise inside the limits. A red point is a special-cause signal: this month's share is unusual compared with the 2015-2019 baseline. It is a prompt to look, not proof of a quality problem. R1 = point beyond a control limit. R2 = 8 months in a row on the same side of the centre line. Limits are Laney-adjusted when months vary more than a simple count model expects.",
+                    "textStyle": {
+                      "fontSize": "10pt"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

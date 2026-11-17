@@ -1,0 +1,132 @@
+table dash_watchlist
+
+	measure 'Flagged Categories' = CALCULATE(COUNTROWS(dash_watchlist), dash_watchlist[flag] = TRUE())
+		formatString: 0
+
+	measure Score = SUM(dash_watchlist[score])
+		formatString: 0.000
+
+	column product_type
+		dataType: string
+		summarizeBy: none
+		sourceColumn: product_type
+
+	column category
+		dataType: string
+		summarizeBy: none
+		sourceColumn: category
+
+	column rank
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: rank
+
+	column score
+		dataType: double
+		summarizeBy: none
+		sourceColumn: score
+
+	column flag
+		dataType: boolean
+		summarizeBy: none
+		sourceColumn: flag
+
+	column flag_label
+		dataType: string
+		summarizeBy: none
+		sourceColumn: flag_label
+
+	column top_component
+		dataType: string
+		summarizeBy: none
+		sourceColumn: top_component
+
+	column why_flagged
+		dataType: string
+		summarizeBy: none
+		sourceColumn: why_flagged
+
+	column stability_pct
+		dataType: double
+		summarizeBy: none
+		sourceColumn: stability_pct
+
+	column stability_note
+		dataType: string
+		summarizeBy: none
+		sourceColumn: stability_note
+
+	column t12
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: t12
+
+	column p12
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: p12
+
+	column momentum
+		dataType: double
+		summarizeBy: none
+		sourceColumn: momentum
+
+	column severity
+		dataType: double
+		summarizeBy: none
+		sourceColumn: severity
+
+	column signal
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: signal
+
+	column breadth
+		dataType: double
+		summarizeBy: none
+		sourceColumn: breadth
+
+	column volume
+		dataType: double
+		summarizeBy: none
+		sourceColumn: volume
+
+	column pct_momentum
+		dataType: double
+		summarizeBy: none
+		sourceColumn: pct_momentum
+
+	column pct_severity
+		dataType: double
+		summarizeBy: none
+		sourceColumn: pct_severity
+
+	column pct_signal
+		dataType: double
+		summarizeBy: none
+		sourceColumn: pct_signal
+
+	column pct_breadth
+		dataType: double
+		summarizeBy: none
+		sourceColumn: pct_breadth
+
+	column pct_volume
+		dataType: double
+		summarizeBy: none
+		sourceColumn: pct_volume
+
+	column month
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		summarizeBy: none
+		sourceColumn: month
+
+	partition dash_watchlist = m
+		mode: import
+		source =
+				let
+				    Source = Parquet.Document(File.Contents(DataFolder & "dashboard\dash_watchlist.parquet")),
+				    Typed = Table.TransformColumnTypes(Source, {{"month", type datetime}})
+				in
+				    Typed

@@ -1,0 +1,113 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.6.0/schema.json",
+  "name": "p3_signals",
+  "position": {
+    "x": 20,
+    "y": 460,
+    "z": 7,
+    "width": 520,
+    "height": 225,
+    "tabOrder": 7
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dash_spc"
+                    }
+                  },
+                  "Property": "month"
+                }
+              },
+              "queryRef": "dash_spc.month",
+              "nativeQueryRef": "month",
+              "displayName": "Month"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dash_spc"
+                    }
+                  },
+                  "Property": "series"
+                }
+              },
+              "queryRef": "dash_spc.series",
+              "nativeQueryRef": "series",
+              "displayName": "Series"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dash_spc"
+                    }
+                  },
+                  "Property": "chart_label"
+                }
+              },
+              "queryRef": "dash_spc.chart_label",
+              "nativeQueryRef": "chart_label",
+              "displayName": "Chart"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dash_spc"
+                    }
+                  },
+                  "Property": "signal_label"
+                }
+              },
+              "queryRef": "dash_spc.signal_label",
+              "nativeQueryRef": "signal_label",
+              "displayName": "Rule"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Signal months (all series; filter with the slicers)'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "12.0D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

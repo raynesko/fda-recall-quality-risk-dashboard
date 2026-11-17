@@ -1,0 +1,115 @@
+table dash_pareto
+
+	measure 'Pareto Value' =
+			VAR w = IF(HASONEVALUE(dash_pareto[weight]), VALUES(dash_pareto[weight]), "count")
+			VAR p = IF(HASONEVALUE(dash_pareto[period_key]), VALUES(dash_pareto[period_key]), "full")
+			RETURN CALCULATE(SUM(dash_pareto[value]), dash_pareto[weight] = w, dash_pareto[period_key] = p)
+		formatString: #,0
+
+	measure 'Pareto Cum Pct' =
+			VAR w = IF(HASONEVALUE(dash_pareto[weight]), VALUES(dash_pareto[weight]), "count")
+			VAR p = IF(HASONEVALUE(dash_pareto[period_key]), VALUES(dash_pareto[period_key]), "full")
+			RETURN CALCULATE(MAX(dash_pareto[cum_pct]), dash_pareto[weight] = w, dash_pareto[period_key] = p) / 100
+		formatString: 0.0%
+
+	measure 'Pareto Sort Key' =
+			VAR w = IF(HASONEVALUE(dash_pareto[weight]), VALUES(dash_pareto[weight]), "count")
+			VAR p = IF(HASONEVALUE(dash_pareto[period_key]), VALUES(dash_pareto[period_key]), "full")
+			RETURN 100 - CALCULATE(MIN(dash_pareto[sort_order]), dash_pareto[weight] = w, dash_pareto[period_key] = p)
+		formatString: 0
+
+	measure 'Pareto Drugs' = CALCULATE([Pareto Value], dash_pareto[product_type] = "Drugs")
+		formatString: #,0
+
+	measure 'Pareto Drugs Cum Pct' = CALCULATE([Pareto Cum Pct], dash_pareto[product_type] = "Drugs")
+		formatString: 0.0%
+
+	measure 'Pareto Drugs Sort' = CALCULATE([Pareto Sort Key], dash_pareto[product_type] = "Drugs")
+		formatString: 0
+
+	measure 'Pareto Food' = CALCULATE([Pareto Value], dash_pareto[product_type] = "Food")
+		formatString: #,0
+
+	measure 'Pareto Food Cum Pct' = CALCULATE([Pareto Cum Pct], dash_pareto[product_type] = "Food")
+		formatString: 0.0%
+
+	measure 'Pareto Food Sort' = CALCULATE([Pareto Sort Key], dash_pareto[product_type] = "Food")
+		formatString: 0
+
+	column product_type
+		dataType: string
+		summarizeBy: none
+		sourceColumn: product_type
+
+	column period
+		dataType: string
+		summarizeBy: none
+		sourceColumn: period
+
+	column weight
+		dataType: string
+		summarizeBy: none
+		sourceColumn: weight
+
+	column category
+		dataType: string
+		summarizeBy: none
+		sourceColumn: category
+
+	column value
+		dataType: double
+		summarizeBy: none
+		sourceColumn: value
+
+	column share
+		dataType: double
+		summarizeBy: none
+		sourceColumn: share
+
+	column cum_share
+		dataType: double
+		summarizeBy: none
+		sourceColumn: cum_share
+
+	column rank
+		dataType: double
+		summarizeBy: none
+		sourceColumn: rank
+
+	column vital_few
+		dataType: boolean
+		summarizeBy: none
+		sourceColumn: vital_few
+
+	column sort_order
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: sort_order
+
+	column bar_label
+		dataType: string
+		summarizeBy: none
+		sourceColumn: bar_label
+
+	column vital_few_label
+		dataType: string
+		summarizeBy: none
+		sourceColumn: vital_few_label
+
+	column cum_pct
+		dataType: double
+		summarizeBy: none
+		sourceColumn: cum_pct
+
+	column period_key
+		dataType: string
+		summarizeBy: none
+		sourceColumn: period_key
+
+	partition dash_pareto = m
+		mode: import
+		source =
+				let
+				    Source = Parquet.Document(File.Contents(DataFolder & "dashboard\dash_pareto.parquet"))
+				in
+				    Source

@@ -1,0 +1,24 @@
+table dim_firm
+
+	column firm_key
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: firm_key
+
+	column firm_norm
+		dataType: string
+		summarizeBy: none
+		sourceColumn: firm_norm
+
+	column firm_name
+		dataType: string
+		summarizeBy: none
+		sourceColumn: firm_name
+
+	partition dim_firm = m
+		mode: import
+		source =
+				let
+				    Source = Parquet.Document(File.Contents(DataFolder & "star\dim_firm.parquet"))
+				in
+				    Source
