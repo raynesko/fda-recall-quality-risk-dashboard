@@ -3,10 +3,10 @@
   "name": "p4_table",
   "position": {
     "x": 20,
-    "y": 120,
+    "y": 134,
     "z": 3,
     "width": 820,
-    "height": 300,
+    "height": 290,
     "tabOrder": 3
   },
   "visual": {
@@ -171,6 +171,148 @@
         }
       ]
     },
-    "drillFilterOtherVisuals": true
+    "drillFilterOtherVisuals": true,
+    "objects": {
+      "values": [
+        {
+          "properties": {
+            "wordWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9.0D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnHeaders": [
+        {
+          "properties": {
+            "wordWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9.0D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "40.0D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "dash_watchlist.rank"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "50.0D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "dash_watchlist.product_type"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "105.0D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "dim_category.category_id"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "70.0D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "dash_watchlist.flag_label"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "50.0D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "dash_watchlist.Risk Score"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "70.0D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "dash_watchlist.stability_pct"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "400.0D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "dash_watchlist.why_flagged"
+          }
+        }
+      ]
+    }
   }
 }

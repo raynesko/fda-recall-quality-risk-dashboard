@@ -3,10 +3,10 @@
   "name": "p2_pareto_food",
   "position": {
     "x": 645,
-    "y": 120,
+    "y": 134,
     "z": 5,
     "width": 615,
-    "height": 330,
+    "height": 320,
     "tabOrder": 5
   },
   "visual": {

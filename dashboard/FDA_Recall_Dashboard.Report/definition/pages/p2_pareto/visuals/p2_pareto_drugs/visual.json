@@ -3,10 +3,10 @@
   "name": "p2_pareto_drugs",
   "position": {
     "x": 20,
-    "y": 120,
+    "y": 134,
     "z": 4,
     "width": 615,
-    "height": 330,
+    "height": 320,
     "tabOrder": 4
   },
   "visual": {

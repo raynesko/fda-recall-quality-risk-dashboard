@@ -22,7 +22,9 @@ table fact_recall_event
 	measure 'Class I Share T12' = DIVIDE(CALCULATE([Events T12], fact_recall_event[classification] = "Class I"), [Events T12])
 		formatString: 0.0%
 
-	measure 'Events Complete Months' = CALCULATE(COUNTROWS(fact_recall_event), fact_recall_event[report_month] >= DATE(2012, 7, 1), fact_recall_event[report_month] <= [As Of Month])
+	measure 'Events Complete Months' =
+			VAR e = [As Of Month]
+			RETURN CALCULATE(COUNTROWS(fact_recall_event), fact_recall_event[report_month] >= DATE(2012, 7, 1), fact_recall_event[report_month] <= e)
 		formatString: #,0
 
 	column event_id

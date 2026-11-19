@@ -3,10 +3,10 @@
   "name": "p2_footer",
   "position": {
     "x": 20,
-    "y": 690,
+    "y": 686,
     "z": 7,
     "width": 1240,
-    "height": 26,
+    "height": 30,
     "tabOrder": 7
   },
   "visual": {

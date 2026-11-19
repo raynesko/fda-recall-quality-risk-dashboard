@@ -3,10 +3,10 @@
   "name": "p2_sl_period",
   "position": {
     "x": 330,
-    "y": 55,
+    "y": 60,
     "z": 2,
-    "width": 400,
-    "height": 60,
+    "width": 300,
+    "height": 64,
     "tabOrder": 2
   },
   "visual": {
@@ -41,6 +41,19 @@
               "expr": {
                 "Literal": {
                   "Value": "'Dropdown'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "header": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
                 }
               }
             }

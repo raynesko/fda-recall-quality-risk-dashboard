@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.6.0/schema.json",
   "name": "p3_card_sel",
   "position": {
-    "x": 620,
-    "y": 55,
+    "x": 600,
+    "y": 60,
     "z": 3,
-    "width": 360,
-    "height": 60,
+    "width": 420,
+    "height": 64,
     "tabOrder": 3
   },
   "visual": {
@@ -34,6 +34,34 @@
         }
       }
     },
+    "objects": {
+      "labels": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "12.0D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "categoryLabels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
     "visualContainerObjects": {
       "title": [
         {
@@ -55,7 +83,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "11.0D"
+                  "Value": "10.0D"
                 }
               }
             }

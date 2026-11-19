@@ -3,10 +3,10 @@
   "name": "p4_components",
   "position": {
     "x": 850,
-    "y": 120,
+    "y": 134,
     "z": 4,
     "width": 410,
-    "height": 300,
+    "height": 290,
     "tabOrder": 4
   },
   "visual": {
@@ -106,6 +106,21 @@
         }
       ]
     },
-    "drillFilterOtherVisuals": true
+    "drillFilterOtherVisuals": true,
+    "objects": {
+      "legend": [
+        {
+          "properties": {
+            "showTitle": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
   }
 }

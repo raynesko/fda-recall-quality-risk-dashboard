@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.6.0/schema.json",
   "name": "p4_backtest",
   "position": {
-    "x": 250,
-    "y": 55,
+    "x": 270,
+    "y": 60,
     "z": 2,
-    "width": 1010,
-    "height": 60,
+    "width": 990,
+    "height": 64,
     "tabOrder": 2
   },
   "visual": {

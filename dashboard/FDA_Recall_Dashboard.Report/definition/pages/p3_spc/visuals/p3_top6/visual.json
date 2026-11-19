@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.6.0/schema.json",
   "name": "p3_top6",
   "position": {
-    "x": 550,
-    "y": 460,
+    "x": 470,
+    "y": 464,
     "z": 8,
-    "width": 710,
-    "height": 225,
+    "width": 790,
+    "height": 212,
     "tabOrder": 8
   },
   "visual": {
@@ -116,6 +116,48 @@
         }
       ]
     },
-    "drillFilterOtherVisuals": true
+    "drillFilterOtherVisuals": true,
+    "objects": {
+      "valueAxis": [
+        {
+          "properties": {
+            "showAxisTitle": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "smallMultiplesLayout": [
+        {
+          "properties": {
+            "gridLayoutType": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Fixed'"
+                }
+              }
+            },
+            "rowCount": {
+              "expr": {
+                "Literal": {
+                  "Value": "2L"
+                }
+              }
+            },
+            "columnCount": {
+              "expr": {
+                "Literal": {
+                  "Value": "3L"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
   }
 }

@@ -3,10 +3,10 @@
   "name": "p3_chart",
   "position": {
     "x": 20,
-    "y": 125,
+    "y": 134,
     "z": 5,
     "width": 830,
-    "height": 330,
+    "height": 320,
     "tabOrder": 5
   },
   "visual": {
@@ -144,6 +144,19 @@
     },
     "drillFilterOtherVisuals": true,
     "objects": {
+      "valueAxis": [
+        {
+          "properties": {
+            "showAxisTitle": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
       "lineStyles": [
         {
           "properties": {

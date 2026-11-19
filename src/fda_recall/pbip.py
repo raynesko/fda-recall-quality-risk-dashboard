@@ -72,7 +72,7 @@ MEASURES = {  # table -> [(name, dax, formatString)]
         ("Events P12", "VAR e = [As Of Month]\nRETURN CALCULATE(COUNTROWS(fact_recall_event), fact_recall_event[report_month] > EDATE(e, -24), fact_recall_event[report_month] <= EDATE(e, -12))", "#,0"),
         ("Change vs Prior 12m", "DIVIDE([Events T12] - [Events P12], [Events P12])", "+0.0%;-0.0%;0.0%"),
         ("Class I Share T12", "DIVIDE(CALCULATE([Events T12], fact_recall_event[classification] = \"Class I\"), [Events T12])", "0.0%"),
-        ("Events Complete Months", "CALCULATE(COUNTROWS(fact_recall_event), fact_recall_event[report_month] >= DATE(2012, 7, 1), fact_recall_event[report_month] <= [As Of Month])", "#,0"),
+        ("Events Complete Months", "VAR e = [As Of Month]\nRETURN CALCULATE(COUNTROWS(fact_recall_event), fact_recall_event[report_month] >= DATE(2012, 7, 1), fact_recall_event[report_month] <= e)", "#,0"),
     ],
     "dash_watchlist": [
         ("Flagged Categories", "CALCULATE(COUNTROWS(dash_watchlist), dash_watchlist[flag] = TRUE())", "0"),
@@ -247,15 +247,19 @@ def textbox(name, x, y, w, h, z, text, size=10, bold=False):
         "general": [{"properties": {"paragraphs": [{"textRuns": [run]}]}}]}})
 
 
-def card(name, x, y, w, h, z, m: dict, label: str):
+def card(name, x, y, w, h, z, m: dict, label: str, value_size: float = 24.0):
+    # The container title carries the label, so the card's own category label is hidden (it duplicated it).
     return container(name, x, y, w, h, z, {
         "visualType": "card",
         "query": {"queryState": {"Values": {"projections": [proj(m, label)]}}},
-        "visualContainerObjects": title(label, 11)})
+        "objects": {"labels": [{"properties": {"fontSize": lit(value_size)}}],
+                    "categoryLabels": [{"properties": {"show": lit(False)}}]},
+        "visualContainerObjects": title(label, 10)})
 
 
 def slicer(name, x, y, w, h, z, field: dict, label: str, mode: str = "Dropdown", single: bool = False):
-    objects = {"data": [{"properties": {"mode": lit(mode)}}]}
+    # Container title is the friendly label; the slicer header (raw column name) is hidden so the control fits.
+    objects = {"data": [{"properties": {"mode": lit(mode)}}], "header": [{"properties": {"show": lit(False)}}]}
     if single:
         objects["selection"] = [{"properties": {"singleSelect": lit(True)}}]
     return container(name, x, y, w, h, z, {
@@ -273,115 +277,149 @@ def chart(name, x, y, w, h, z, vtype: str, roles: dict, ttl: str, sort: tuple | 
     return container(name, x, y, w, h, z, v)
 
 
+def table(name, x, y, w, h, z, cols: list[tuple[dict, str, int]], ttl: str, sort: tuple | None = None):
+    """tableEx with fixed column widths (px) that sum to less than the visual width, and wrapped text,
+    so long FDA text wraps instead of forcing a horizontal scrollbar."""
+    assert sum(c[2] for c in cols) <= w - 24, f"{name}: column widths exceed visual width"
+    ps = [proj(f, d) for f, d, _ in cols]
+    objects = {"values": [{"properties": {"wordWrap": lit(True), "fontSize": lit(9.0)}}],
+               "columnHeaders": [{"properties": {"wordWrap": lit(True), "fontSize": lit(9.0)}}],
+               "columnWidth": [{"properties": {"value": lit(float(px))}, "selector": {"metadata": p["queryRef"]}}
+                               for p, (_, _, px) in zip(ps, cols)]}
+    return chart(name, x, y, w, h, z, "tableEx", {"Values": ps}, ttl, sort, objects)
+
+
+NO_VALUE_AXIS_TITLE = {"valueAxis": [{"properties": {"showAxisTitle": lit(False)}}]}
+NO_LEGEND_TITLE = {"legend": [{"properties": {"showTitle": lit(False)}}]}
+
+# Layout grid (canvas 1280 x 720): 20 px margins, 10 px gutters, same header band on every page.
+TITLE_Y, TITLE_H = 8, 48
+CTRL_Y, CTRL_H = 60, 64
+BODY_Y = 134
+FOOT_Y, FOOT_H = 686, 30
+
+
+def page_title(name, text):
+    return textbox(name, 20, TITLE_Y, 1240, TITLE_H, 0, text, 16, True)
+
+
 def footer(name, z):
-    return textbox(name, 20, 690, 1240, 26, z, FOOTER, 8)
+    return textbox(name, 20, FOOT_Y, 1240, FOOT_H, z, FOOTER, 8)
 
 
 def pages() -> dict[str, tuple[str, list[dict]]]:
-    fe, pt = "fact_recall_event", "dim_product_type"
+    fe, pt, dc = "fact_recall_event", "dim_product_type", "dim_category"
+    # ---- Page 1: executive summary -------------------------------------------------------------
     p1 = [
-        textbox("p1_title", 20, 10, 900, 40, 0, "FDA Recall & Quality Risk - Executive summary", 18, True),
-        slicer("p1_sl_product", 20, 60, 220, 70, 1, col(pt, "product_type"), "Product type"),
-        slicer("p1_sl_class", 250, 60, 220, 70, 2, col(fe, "classification"), "FDA class"),
-        slicer("p1_sl_date", 480, 60, 400, 70, 3, col("dim_date", "date"), "Report date", mode="Between"),
-        card("p1_card_t12", 20, 140, 300, 110, 4, meas(fe, "Events T12"), "Recall events, last 12 complete months"),
-        card("p1_card_change", 330, 140, 300, 110, 5, meas(fe, "Change vs Prior 12m"), "Change vs prior 12 months"),
-        card("p1_card_class1", 640, 140, 300, 110, 6, meas(fe, "Class I Share T12"), "Class I share, last 12 months"),
-        card("p1_card_flags", 950, 140, 310, 110, 7, meas("dash_watchlist", "Flagged Categories"), "Flagged categories (risk watchlist)"),
-        chart("p1_trend", 20, 260, 1240, 380, 8, "lineChart",
+        page_title("p1_title", "FDA Recall & Quality Risk - Executive summary"),
+        slicer("p1_sl_product", 20, CTRL_Y, 240, CTRL_H, 1, col(pt, "product_type"), "Product type"),
+        slicer("p1_sl_class", 270, CTRL_Y, 240, CTRL_H, 2, col(fe, "classification"), "FDA class"),
+        slicer("p1_sl_date", 520, CTRL_Y, 400, CTRL_H, 3, col("dim_date", "date"), "Report date", mode="Between"),
+        card("p1_card_t12", 20, BODY_Y, 302, 100, 4, meas(fe, "Events T12"), "Recall events, last 12 complete months"),
+        card("p1_card_change", 332, BODY_Y, 302, 100, 5, meas(fe, "Change vs Prior 12m"), "Change vs prior 12 months"),
+        card("p1_card_class1", 644, BODY_Y, 302, 100, 6, meas(fe, "Class I Share T12"), "Class I share, last 12 months"),
+        card("p1_card_flags", 956, BODY_Y, 304, 100, 7, meas("dash_watchlist", "Flagged Categories"), "Flagged categories (risk watchlist)"),
+        chart("p1_trend", 20, 244, 1240, 432, 8, "lineChart",
               {"Category": [proj(col("dim_date", "month_start"), "Report month")],
                "Y": [proj(meas(fe, "Events Complete Months"), "Recall events")],
                "Series": [proj(col(fe, "product_type"), "Product type")]},
               "Monthly recall events by product type (complete months; counts, not rates)"),
-        container("p1_asof", 20, 645, 1240, 40, 9, {
+        container("p1_asof", 20, FOOT_Y, 1240, FOOT_H, 9, {
             "visualType": "card", "query": {"queryState": {"Values": {"projections": [proj(meas("dash_kpi", "Data As Of"), "Data as of")]}}},
-            "objects": {"labels": [{"properties": {"fontSize": lit(9.0)}}], "categoryLabels": [{"properties": {"show": lit(False)}}]}}),
+            "objects": {"labels": [{"properties": {"fontSize": lit(8.0)}}], "categoryLabels": [{"properties": {"show": lit(False)}}]}}),
     ]
-    dc = "dim_category"
+    # ---- Page 2: Pareto --------------------------------------------------------------------------
     p2 = [
-        textbox("p2_title", 20, 10, 1240, 40, 0, "Pareto: which stated failure modes drive most recall events?", 18, True),
-        slicer("p2_sl_weight", 20, 55, 300, 60, 1, col("dash_pareto", "weight"), "Weighting (count / severity / class1)", single=True),
-        slicer("p2_sl_period", 330, 55, 400, 60, 2, col("dash_pareto", "period_key"), "Period (full / trailing 60 months)", single=True),
-        textbox("p2_note", 740, 55, 520, 60, 3, "Bars = recall events per category, largest first; UNCLASSIFIED (no keyword rule matched) is always the last bar. Line = cumulative %. Click a bar to list its events below.", 9),
-        chart("p2_pareto_drugs", 20, 120, 615, 330, 4, "lineClusteredColumnComboChart",
+        page_title("p2_title", "Pareto: which stated failure modes drive most recall events?"),
+        slicer("p2_sl_weight", 20, CTRL_Y, 300, CTRL_H, 1, col("dash_pareto", "weight"), "Weighting (count / severity / class1)", single=True),
+        slicer("p2_sl_period", 330, CTRL_Y, 300, CTRL_H, 2, col("dash_pareto", "period_key"), "Period (full / trailing 60 months)", single=True),
+        textbox("p2_note", 640, CTRL_Y, 620, CTRL_H, 3, "Bars = recall events per category, largest first; UNCLASSIFIED (no keyword rule matched) is always the last bar. Line = cumulative %. Click a bar to list its events below.", 9),
+        chart("p2_pareto_drugs", 20, BODY_Y, 615, 320, 4, "lineClusteredColumnComboChart",
               {"Category": [proj(col(dc, "category_id"), "Category")],
                "Y": [proj(meas("dash_pareto", "Pareto Drugs"), "Events (drugs)")],
                "Y2": [proj(meas("dash_pareto", "Pareto Drugs Cum Pct"), "Cumulative %")],
                "Tooltips": [proj(meas("dash_pareto", "Pareto Drugs Sort"), "Sort key")]},
               "Drugs: a few categories account for most events",
               sort=(meas("dash_pareto", "Pareto Drugs Sort"), "Descending")),
-        chart("p2_pareto_food", 645, 120, 615, 330, 5, "lineClusteredColumnComboChart",
+        chart("p2_pareto_food", 645, BODY_Y, 615, 320, 5, "lineClusteredColumnComboChart",
               {"Category": [proj(col(dc, "category_id"), "Category")],
                "Y": [proj(meas("dash_pareto", "Pareto Food"), "Events (food)")],
                "Y2": [proj(meas("dash_pareto", "Pareto Food Cum Pct"), "Cumulative %")],
                "Tooltips": [proj(meas("dash_pareto", "Pareto Food Sort"), "Sort key")]},
               "Food: allergens and microbial contamination dominate",
               sort=(meas("dash_pareto", "Pareto Food Sort"), "Descending")),
-        chart("p2_events", 20, 460, 1240, 225, 6, "tableEx",
-              {"Values": [proj(col(fe, "event_id"), "Event"), proj(col(fe, "product_type"), "Type"),
-                          proj(col(fe, "category_id"), "Category"), proj(col(fe, "classification"), "Class"),
-                          proj(col("dim_firm", "firm_name"), "Recalling firm"),
-                          proj(col(fe, "reason_for_recall"), "Reason for recall (FDA text)")]},
+        table("p2_events", 20, 464, 1240, 212, 6,
+              [(col(fe, "event_id"), "Event", 60), (col(fe, "product_type"), "Type", 50),
+               (col(fe, "category_id"), "Category", 110), (col(fe, "classification"), "Class", 60),
+               (col("dim_firm", "firm_name"), "Recalling firm", 240),
+               (col(fe, "reason_for_recall"), "Reason for recall (FDA text)", 680)],
               "Event detail (click a Pareto bar to filter)"),
         footer("p2_footer", 7),
     ]
+    # ---- Page 3: control charts ------------------------------------------------------------------
     sp = "dash_spc"
     p3 = [
-        textbox("p3_title", 20, 10, 1240, 40, 0, "Control charts: is a category's recall activity unusual versus its 2015-2019 baseline?", 16, True),
-        slicer("p3_sl_series", 20, 55, 300, 60, 1, col(sp, "series"), "Category series", single=True),
-        slicer("p3_sl_chart", 330, 55, 280, 60, 2, col(sp, "chart_label"), "Chart type", single=True),
-        card("p3_card_sel", 620, 55, 360, 60, 3, meas(sp, "SPC Selected Series"), "Showing"),
-        card("p3_card_sig", 990, 55, 270, 60, 4, meas(sp, "SPC Signals After Baseline"), "Signalled months after baseline"),
-        chart("p3_chart", 20, 125, 830, 330, 5, "lineChart",
+        page_title("p3_title", "Control charts: is a category's recall activity unusual versus its 2015-2019 baseline?"),
+        slicer("p3_sl_series", 20, CTRL_Y, 300, CTRL_H, 1, col(sp, "series"), "Category series", single=True),
+        slicer("p3_sl_chart", 330, CTRL_Y, 260, CTRL_H, 2, col(sp, "chart_label"), "Chart type", single=True),
+        card("p3_card_sel", 600, CTRL_Y, 420, CTRL_H, 3, meas(sp, "SPC Selected Series"), "Showing", value_size=12.0),
+        card("p3_card_sig", 1030, CTRL_Y, 230, CTRL_H, 4, meas(sp, "SPC Signals After Baseline"), "Signalled months after baseline", value_size=16.0),
+        chart("p3_chart", 20, BODY_Y, 830, 320, 5, "lineChart",
               {"Category": [proj(col(sp, "month"), "Month")],
                "Y": [proj(meas(sp, "SPC Value"), "Value"), proj(meas(sp, "SPC CL"), "Centre line"),
                      proj(meas(sp, "SPC UCL"), "Upper control limit"), proj(meas(sp, "SPC LCL"), "Lower control limit"),
                      proj(meas(sp, "SPC Signal Point"), "Signal (special cause)")]},
               "Selected category: points outside the limits or long runs are signals",
-              objects={"lineStyles": [{"properties": {"showMarker": lit(False)}},
+              objects={**NO_VALUE_AXIS_TITLE,
+                       "lineStyles": [{"properties": {"showMarker": lit(False)}},
                                       {"properties": {"showMarker": lit(True), "strokeWidth": lit(0)},
                                        "selector": {"metadata": "dash_spc.SPC Signal Point"}}]}),
-        textbox("p3_explain", 860, 125, 400, 330, 6, "How to read this chart. " + TOOLTIP +
+        textbox("p3_explain", 860, BODY_Y, 400, 320, 6, "How to read this chart. " + TOOLTIP +
                 " R1 = point beyond a control limit. R2 = 8 months in a row on the same side of the centre line. "
                 "Limits are Laney-adjusted when months vary more than a simple count model expects.", 10),
-        chart("p3_signals", 20, 460, 520, 225, 7, "tableEx",
-              {"Values": [proj(col(sp, "month"), "Month"), proj(col(sp, "series"), "Series"),
-                          proj(col(sp, "chart_label"), "Chart"), proj(col(sp, "signal_label"), "Rule")]},
+        table("p3_signals", 20, 464, 440, 212, 7,
+              [(col(sp, "month"), "Month", 80), (col(sp, "series"), "Series", 140),
+               (col(sp, "chart_label"), "Chart", 130), (col(sp, "signal_label"), "Rule", 50)],
               "Signal months (all series; filter with the slicers)"),
-        chart("p3_top6", 550, 460, 710, 225, 8, "lineChart",
+        chart("p3_top6", 470, 464, 790, 212, 8, "lineChart",
               {"Category": [proj(col(sp, "month"), "Month")],
                "Y": [proj(meas(sp, "Top6 Share"), "Share of month"), proj(meas(sp, "Top6 UCL"), "UCL")],
                "Rows": [proj(col(sp, "series"), "Series")]},
-              "Top 6 categories (p-chart small multiples)"),
+              "Top 6 categories (p-chart small multiples)",
+              objects={**NO_VALUE_AXIS_TITLE,
+                       "smallMultiplesLayout": [{"properties": {"gridLayoutType": lit("Fixed"),
+                                                                "rowCount": lit(2), "columnCount": lit(3)}}]}),
         footer("p3_footer", 9),
     ]
+    # ---- Page 4: risk watchlist ------------------------------------------------------------------
     wl = "dash_watchlist"
     p4 = [
-        textbox("p4_title", 20, 10, 1240, 40, 0, "Risk watchlist: which failure modes deserve QA attention now? (triage, not prediction)", 16, True),
-        slicer("p4_sl_product", 20, 55, 220, 60, 1, col(pt, "product_type"), "Product type"),
-        textbox("p4_backtest", 250, 55, 1010, 60, 2, "Honest result: in a pre-registered backtest (10 yearly origins) this score did NOT beat naive baselines at predicting next-year increases (regression to the mean). Use it to triage attention; check 'Stability %' before acting.", 9),
-        chart("p4_table", 20, 120, 820, 300, 3, "tableEx",
-              {"Values": [proj(col(wl, "rank"), "Rank"), proj(col(wl, "product_type"), "Type"),
-                          proj(col(dc, "category_id"), "Category"), proj(col(wl, "flag_label"), "Flag"),
-                          proj(meas(wl, "Risk Score"), "Score"), proj(col(wl, "stability_pct"), "Stability %"),
-                          proj(col(wl, "why_flagged"), "Why flagged")]},
+        page_title("p4_title", "Risk watchlist: which failure modes deserve QA attention now? (triage, not prediction)"),
+        slicer("p4_sl_product", 20, CTRL_Y, 240, CTRL_H, 1, col(pt, "product_type"), "Product type"),
+        textbox("p4_backtest", 270, CTRL_Y, 990, CTRL_H, 2, "Honest result: in a pre-registered backtest (10 yearly origins) this score did NOT beat naive baselines at predicting next-year increases (regression to the mean). Use it to triage attention; check 'Stability %' before acting.", 9),
+        table("p4_table", 20, BODY_Y, 820, 290, 3,
+              [(col(wl, "rank"), "Rank", 40), (col(wl, "product_type"), "Type", 50),
+               (col(dc, "category_id"), "Category", 105), (col(wl, "flag_label"), "Flag", 70),
+               (meas(wl, "Risk Score"), "Score", 50), (col(wl, "stability_pct"), "Stability %", 70),
+               (col(wl, "why_flagged"), "Why flagged", 400)],
               "Ranked categories (latest complete month) - click a row for QA actions",
               sort=(meas(wl, "Risk Score"), "Descending")),
-        chart("p4_components", 850, 120, 410, 300, 4, "barChart",
+        chart("p4_components", 850, BODY_Y, 410, 290, 4, "barChart",
               {"Category": [proj(col(dc, "category_id"), "Category")],
                "Y": [proj({"Aggregation": {"Expression": col("dash_watch_components", "weighted_contribution"), "Function": 0}}, "Contribution")],
                "Series": [proj(col("dash_watch_components", "component"), "Component")]},
-              "What makes up each score (weighted components)"),
-        chart("p4_actions", 20, 425, 820, 260, 5, "tableEx",
-              {"Values": [proj(col("dash_actions", "category"), "Category"), proj(col("dash_actions", "phase"), "DMAIC phase"),
-                          proj(col("dash_actions", "action"), "Recommended QA action"),
-                          proj(col("dash_actions", "owner_function"), "Owner"), proj(col("dash_actions", "metric"), "Example metric"),
-                          proj(col("dash_actions", "citation"), "Citation")]},
+              "What makes up each score (weighted components)", objects=NO_LEGEND_TITLE),
+        table("p4_actions", 20, 434, 820, 242, 5,
+              [(col("dash_actions", "category"), "Category", 90), (col("dash_actions", "phase"), "DMAIC phase", 70),
+               (col("dash_actions", "action"), "Recommended QA action", 300),
+               (col("dash_actions", "owner_function"), "Owner", 90), (col("dash_actions", "metric"), "Example metric", 150),
+               (col("dash_actions", "citation"), "Citation", 90)],
               "DMAIC QA actions for the selected category"),
-        textbox("p4_limits", 850, 425, 410, 260, 6, "Limitations. Counts are FDA-recorded recall events with no production "
+        textbox("p4_limits", 850, 434, 410, 242, 6, "Limitations. Counts are FDA-recorded recall events with no production "
                 "denominator, so they are not failure rates. FDA classification and enforcement priorities shape what is "
                 "recorded. Categories come from keyword rules (~0.90 precision; Unclassified shown). USDA-FSIS meat/poultry "
                 "recalls are excluded. " + DISCLAIMER, 9),
+        footer("p4_footer", 7),
     ]
     return {"p1_exec": ("1 Executive summary", p1), "p2_pareto": ("2 Pareto", p2),
             "p3_spc": ("3 Control charts", p3), "p4_watchlist": ("4 Risk watchlist", p4)}

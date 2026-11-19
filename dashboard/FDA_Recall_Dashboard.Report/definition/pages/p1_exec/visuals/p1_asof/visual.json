@@ -3,10 +3,10 @@
   "name": "p1_asof",
   "position": {
     "x": 20,
-    "y": 645,
+    "y": 686,
     "z": 9,
     "width": 1240,
-    "height": 40,
+    "height": 30,
     "tabOrder": 9
   },
   "visual": {
@@ -41,7 +41,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "9.0D"
+                  "Value": "8.0D"
                 }
               }
             }

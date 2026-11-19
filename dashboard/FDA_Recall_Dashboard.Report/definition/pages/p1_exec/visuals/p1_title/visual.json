@@ -3,10 +3,10 @@
   "name": "p1_title",
   "position": {
     "x": 20,
-    "y": 10,
+    "y": 8,
     "z": 0,
-    "width": 900,
-    "height": 40,
+    "width": 1240,
+    "height": 48,
     "tabOrder": 0
   },
   "visual": {
@@ -21,7 +21,7 @@
                   {
                     "value": "FDA Recall & Quality Risk - Executive summary",
                     "textStyle": {
-                      "fontSize": "18pt",
+                      "fontSize": "16pt",
                       "fontWeight": "bold"
                     }
                   }

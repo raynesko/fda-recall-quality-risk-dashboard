@@ -3,10 +3,10 @@
   "name": "p1_trend",
   "position": {
     "x": 20,
-    "y": 260,
+    "y": 244,
     "z": 8,
     "width": 1240,
-    "height": 380,
+    "height": 432,
     "tabOrder": 8
   },
   "visual": {

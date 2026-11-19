@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "FDA_Recall_Dashboard"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "c33d0674-b716-4633-a39e-d1a84eb14b8d"
+  }
+}
