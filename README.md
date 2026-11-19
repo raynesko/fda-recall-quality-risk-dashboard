@@ -7,7 +7,9 @@
 
 **Which stated failure modes drive FDA drug and food recalls, which are shifting beyond normal variation, and what should a QA function look at?** This repo answers that from public openFDA enforcement data. It classifies recall reasons into root-cause categories, applies Pareto, control charts and trend tests, evaluates a transparent risk score against naive baselines, and frames the result in DMAIC with QA actions. The output is a 4-page Power BI dashboard.
 
-![Food recall Pareto](reports/figures/pareto_food_full.png)
+![Dashboard page 1: executive summary](docs/dashboard/screens/p1_executive_summary.png)
+
+*Power BI dashboard, page 1 (exported from Power BI Desktop; data as of report date 2026-11-04). All 4 pages: [`docs/dashboard/dashboard.pdf`](docs/dashboard/dashboard.pdf).*
 
 
 **Headline results** (all *achieved* values, from `results/metrics.json`):
@@ -28,7 +30,13 @@ A 4-page Power BI report, generated as text (PBIP: TMDL semantic model + PBIR re
 | 3 Control charts | Is a category unusual versus its 2015-2019 baseline? | Selectable c- or p-chart with centre line, Laney-adjusted limits and highlighted signals; table of signal months; top-6 small multiples |
 | 4 Risk watchlist | Which failure modes deserve QA attention now? | Ranked categories with score, stability % and plain-language "why flagged"; weighted score components; DMAIC QA actions with owner, metric and CFR citation for the selected category; backtest result and limitations on the page |
 
-Page 1 shows the data-as-of date, and every page states that counts are recall events, not rates. Test protocol: `docs/dashboard/test-checklist.md`; reconciliation sheet: `docs/dashboard/reconciliation.md`.
+Page 1 shows the data-as-of date, and every page states that counts are recall events, not rates.
+
+| | |
+|---|---|
+| ![Pareto page](docs/dashboard/screens/p2_pareto.png) **2 Pareto** | ![Control charts page](docs/dashboard/screens/p3_control_charts.png) **3 Control charts** |
+| ![Risk watchlist page](docs/dashboard/screens/p4_risk_watchlist.png) **4 Risk watchlist** | ![Food recall Pareto (matplotlib)](reports/figures/pareto_food_full.png) **Pipeline figure: food Pareto** |
+ Test protocol: `docs/dashboard/test-checklist.md`; reconciliation sheet: `docs/dashboard/reconciliation.md`.
 
 ## 1. Problem
 QA and regulatory-intelligence teams in food and pharma want to learn from industry recalls. Each FDA enforcement record holds a free-text `reason_for_recall`, so seeing patterns means reading thousands of records. This project turns those records into a classified, statistically monitored view.
